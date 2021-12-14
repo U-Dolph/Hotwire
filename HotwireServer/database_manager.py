@@ -25,13 +25,28 @@ class DatabaseManager:
             print(e)
             return True
 
+    def check_nickname(self, nickname):
+        _cursor = self.mysql.connection.cursor()
+        _cursor.execute("SELECT NICKNAME_ID FROM users WHERE NICKNAME=%s order by NICKNAME_ID LIMIT 1", (nickname, ))
+
+        result = _cursor.fetchone()
+
+        if result:
+            return result[0] + 1
+
+        return 0
+
     def register_user(self, user):
         if not self.user_exists(user.username):
             try:
                 _cursor = self.mysql.connection.cursor()
-                _cursor.execute("INSERT INTO `users`(USERNAME, NICKNAME, PWD, STATUS) "
-                                "VALUES (%s, %s, %s, %s)",
-                                (user.username, user.nickname, user.password, user.status, ))
+
+                user.nickname_id = self.check_nickname(user.nickname)
+
+                _cursor.execute("INSERT INTO `users`(USERNAME, NICKNAME, NICKNAME_ID , PWD, STATUS, TIME_REGISTERED) "
+                                "VALUES (%s, %s, %s, %s, %s, %s)",
+                                (user.username, user.nickname, user.nickname_id,
+                                 user.password, user.status, user.time_registered, ))
 
                 self.mysql.connection.commit()
 
