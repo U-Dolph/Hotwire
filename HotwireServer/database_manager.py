@@ -26,12 +26,12 @@ class DatabaseManager:
             return True
 
     def register_user(self, user):
-        if not self.user_exists(user['username']):
+        if not self.user_exists(user.username):
             try:
                 _cursor = self.mysql.connection.cursor()
                 _cursor.execute("INSERT INTO `users`(USERNAME, NICKNAME, PWD, STATUS) "
                                 "VALUES (%s, %s, %s, %s)",
-                                (user['username'], user['nickname'], user['password'], int(0), ))
+                                (user.username, user.nickname, user.password, user.status, ))
 
                 self.mysql.connection.commit()
 
