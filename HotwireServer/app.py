@@ -1,25 +1,24 @@
-"""
-This script runs the application using a development server.
-It contains the definition of routes and views for the application.
-"""
+import json
 
 from flask import Flask
-app = Flask(__name__)
+from database_manager import DB_Manager
+from endpoints.register import register_page
 
-# Make the WSGI interface available at the top level so wfastcgi can get it.
-wsgi_app = app.wsgi_app
-
-
-@app.route('/')
-def hello():
-    """Renders a sample page."""
-    return "Hello World!"
 
 if __name__ == '__main__':
-    import os
-    HOST = os.environ.get('SERVER_HOST', 'localhost')
-    try:
-        PORT = int(os.environ.get('SERVER_PORT', '5555'))
-    except ValueError:
-        PORT = 5555
-    app.run(HOST, PORT)
+    app = Flask(__name__)
+    app.app_context()
+
+    with open("credentials.conf") as f:
+        data = json.load(f)
+
+        app.config["MYSQL_HOST"] = data['host']
+        app.config['MYSQL_USER'] = data['user']
+        app.config['MYSQL_PASSWORD'] = data['pw']
+        app.config['MYSQL_DB'] = data['db']
+
+    DB_Manager.register_app(app)
+
+    app.register_blueprint(register_page)
+
+    app.run(host="127.0.0.1", port="5000", debug=True)
