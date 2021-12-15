@@ -20,11 +20,15 @@
                  Margin="10, 10, 10, 0"
                  Style="{StaticResource txtBxStyle}"/>
         
-        <TextBox Text="Password"
+        <PasswordBox
                  Grid.Row="1"
                  Margin="10, 10, 10, 0"
                  VerticalAlignment="Center"
-                 Style="{StaticResource txtBxStyle}"/>
+                 Width="200"
+                 Height="50"
+                 FontSize="18"
+                 VerticalContentAlignment="Center"
+                 Template="{StaticResource passwordbox}"/>
 
         <Button Content="Login"
                 Grid.Row="2"
@@ -43,7 +47,7 @@
                FontSize="14"
                HorizontalAlignment="Center"
                Foreground="Red"
-               Visibility="Hidden"/>
+               Visibility="Visible"/>
 
         <Label Grid.Row="5"
                HorizontalAlignment="Center"
