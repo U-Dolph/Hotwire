@@ -4,6 +4,39 @@
              xmlns:local="clr-namespace:Hotwire"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Style x:Key="lblStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+            </Style>
+
+            <Style x:Key="bttnStyle" TargetType="Button">
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="White" BorderThickness="1" Padding="2">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="txtBxStyle" TargetType="TextBox">
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Style.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
