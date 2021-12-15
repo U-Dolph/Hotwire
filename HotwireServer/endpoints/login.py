@@ -17,9 +17,13 @@ def login():
         user = DB_Manager.get_user(data['username'])
 
         if result == "OK":
-            token = jwt.encode({'id': user.id,
-                                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=15)},
-                               conf['secret_key'])
+            if 'stay_logged_in' in data:
+                token = jwt.encode({'id': user.id},
+                                   conf['secret_key'])
+            else:
+                token = jwt.encode({'id': user.id,
+                                    'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=15)},
+                                   conf['secret_key'])
 
             return make_response(jsonify({'token': token.decode('UTF-8')}), 201)
 
