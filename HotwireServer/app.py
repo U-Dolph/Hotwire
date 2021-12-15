@@ -3,20 +3,18 @@ from database_manager import DB_Manager
 from endpoints import register, login
 from flask import Flask
 from flask_socketio import SocketIO
+from config_holder import conf
 
 
 if __name__ == '__main__':
     app = Flask(__name__)
     app.app_context()
 
-    with open("credentials.conf") as f:
-        data = json.load(f)
-
-        app.config["MYSQL_HOST"] = data['host']
-        app.config['MYSQL_USER'] = data['user']
-        app.config['MYSQL_PASSWORD'] = data['pw']
-        app.config['MYSQL_DB'] = data['db']
-        app.config['SECRET_KEY'] = data['secret_key']
+    app.config["MYSQL_HOST"] = conf['host']
+    app.config['MYSQL_USER'] = conf['user']
+    app.config['MYSQL_PASSWORD'] = conf['pw']
+    app.config['MYSQL_DB'] = conf['db']
+    app.config['SECRET_KEY'] = conf['secret_key']
 
     DB_Manager.register_app(app)
 
