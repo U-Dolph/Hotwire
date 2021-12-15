@@ -1,6 +1,6 @@
 import json
 from database_manager import DB_Manager
-from endpoints import register, login
+from endpoints import register, login, setup_socket
 from flask import Flask
 from flask_socketio import SocketIO
 from config_holder import conf
@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     app.register_blueprint(register.register_page)
     app.register_blueprint(login.login_page)
+    app.register_blueprint(setup_socket.socket_page)
 
     app_socket = SocketIO(app)
 
