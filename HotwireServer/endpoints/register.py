@@ -1,7 +1,6 @@
 from flask import Blueprint, request, Response
 from database_manager import DB_Manager
 from models.User import User
-import hashlib
 
 register_page = Blueprint('register_page', __name__)
 
@@ -15,4 +14,4 @@ def register_user():
 
     result = DB_Manager.register_user(User(data))
 
-    return Response(result, 200)
+    return Response(result, 200 if result == "User registered" else 400)
