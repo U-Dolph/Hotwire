@@ -1,5 +1,4 @@
 import datetime
-import json
 from flask import Blueprint, request, Response, make_response, jsonify
 from database_manager import DB_Manager
 import jwt
@@ -17,7 +16,7 @@ def login():
         user = DB_Manager.get_user(data['username'])
 
         if result == "OK":
-            if 'stay_logged_in' in data:
+            if 'stay_logged_in' in data and data['stay_logged_in']:
                 token = jwt.encode({'id': user.id},
                                    conf['secret_key'])
             else:
