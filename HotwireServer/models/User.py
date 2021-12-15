@@ -4,6 +4,7 @@ import hashlib
 
 class User:
     def __init__(self, data):
+        self.id = data['id'] if 'id' in data.keys() else None
         self.username = data['username']
         self.nickname = data['nickname']
         self.nickname_id = 0
