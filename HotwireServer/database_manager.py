@@ -2,6 +2,7 @@ import hashlib
 
 import MySQLdb
 from flask_mysqldb import MySQL
+from models.User import User
 
 
 class DatabaseManager:
@@ -41,7 +42,13 @@ class DatabaseManager:
         result = _cursor.fetchall()
         _cursor.close()
 
-        print(result[0])
+        result = result[0]
+
+        return User({
+            "id": result[0], "username": result[1], "nickname": result[2],
+            "nickname_id": result[3], "password": result[4], "status": result[5],
+            "time_registered": result[6]
+        })
 
     def check_nickname(self, nickname):
         _cursor = self.mysql.connection.cursor()
@@ -61,10 +68,11 @@ class DatabaseManager:
 
                 user.nickname_id = self.check_nickname(user.nickname)
 
-                _cursor.execute("INSERT INTO `users`(USERNAME, NICKNAME, NICKNAME_ID , PWD, STATUS, TIME_REGISTERED) "
+                _cursor.execute("INSERT INTO users(USERNAME, NICKNAME, NICKNAME_ID , PWD, STATUS, TIME_REGISTERED) "
                                 "VALUES (%s, %s, %s, %s, %s, %s)",
                                 (user.username, user.nickname, user.nickname_id,
-                                 user.password, user.status, user.time_registered, ))
+                                 hashlib.sha256(user.password.encode("ascii")).hexdigest(),
+                                 user.status, user.time_registered, ))
 
                 self.mysql.connection.commit()
 
@@ -76,9 +84,10 @@ class DatabaseManager:
 
         return "User already exists"
 
-    def check_credentials(self, username, passwd):
+    def check_credentials(self, username, password):
         if self.user_exists(username):
-            if self.get_password(username) == hashlib.sha256(passwd.encode("ascii")).hexdigest():
+            self.get_user(username)
+            if self.get_password(username) == hashlib.sha256(password.encode("ascii")).hexdigest():
                 return "OK"
 
             return "Invalid password"
