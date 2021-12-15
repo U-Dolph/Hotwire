@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hotwire"
         xmlns:View="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Width="400" Height="600"
+        Title="MainWindow" Width="400" Height="625"
         Background="#121212"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
@@ -16,17 +16,18 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10, 100, 10, 100">
+        <StackPanel Grid.Row="0">
             <Label Content="Welcome to HotWire!"
                    HorizontalAlignment="Center"
                    Style="{StaticResource lblStyle}"/>
 
-            <Label Content="Place of logo"
-                   HorizontalAlignment="Center"
-                   Style="{StaticResource lblStyle}"/>
+            <Image Source="Resources/logo.png"
+                   Width="150"
+                   Height="150"
+                   Margin="0, 25, 0, 25"/>
         </StackPanel>
-        
-        <StackPanel Grid.Column="1" Grid.Row="1">
+
+        <StackPanel Grid.Row="1">
             <View:LoginView/>
         </StackPanel>
 
