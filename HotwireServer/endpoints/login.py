@@ -1,7 +1,9 @@
+import datetime
 import json
-from flask import Blueprint, request, Response
+from flask import Blueprint, request, Response, make_response, jsonify
 from database_manager import DB_Manager
-from models.User import User
+import jwt
+from config_holder import conf
 
 login_page = Blueprint('login_page', __name__)
 
@@ -12,7 +14,15 @@ def login():
 
     if 'username' in data and 'password' in data:
         result = DB_Manager.check_credentials(data['username'], data['password'])
+        user = DB_Manager.get_user(data['username'])
 
-        return Response(result, 200 if result == "OK" else 400)
+        if result == "OK":
+            token = jwt.encode({'id': user.id,
+                                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=15)},
+                               conf['secret_key'])
+
+            return make_response(jsonify({'token': token.decode('UTF-8')}), 201)
+
+        return Response(result, 400)
     else:
         return Response("Missing arguments", 400)
