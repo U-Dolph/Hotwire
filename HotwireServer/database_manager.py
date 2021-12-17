@@ -1,5 +1,5 @@
 import hashlib
-
+import datetime
 import MySQLdb
 from flask_mysqldb import MySQL
 from models.User import User
@@ -36,9 +36,23 @@ class DatabaseManager:
 
         return result[0][0]
 
-    def get_user(self, username):
+    def get_user_by_username(self, username):
         _cursor = self.mysql.connection.cursor()
         _cursor.execute("SELECT * FROM users WHERE USERNAME=%s", (username,))
+        result = _cursor.fetchall()
+        _cursor.close()
+
+        result = result[0]
+
+        return User({
+            "id": result[0], "username": result[1], "nickname": result[2],
+            "nickname_id": result[3], "password": result[4], "status": result[5],
+            "time_registered": result[6]
+        })
+
+    def get_user_by_nickname(self, nickname):
+        _cursor = self.mysql.connection.cursor()
+        _cursor.execute("SELECT * FROM users WHERE Nickame=%s", (nickname,))
         result = _cursor.fetchall()
         _cursor.close()
 
@@ -86,13 +100,30 @@ class DatabaseManager:
 
     def check_credentials(self, username, password):
         if self.user_exists(username):
-            self.get_user(username)
+            self.get_user_by_username(username)
             if self.get_password(username) == hashlib.sha256(password.encode("ascii")).hexdigest():
                 return "OK"
 
             return "Invalid password"
         else:
             return "Invalid username"
+
+    def add_friend_by_nickname(self, user_id, nickname):
+        friend = self.get_user_by_nickname(nickname)
+
+        _cursor = self.mysql.connection.cursor()
+        _cursor.execute("INSERT INTO firendships(User_ID, Friend_ID, Pending , Date_Modified) "
+                        "VALUES (%s, %s, %s, %s, %s, %s)",
+                        (user_id, friend.id, 0,
+                         datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),))
+
+        self.mysql.connection.commit()
+        _cursor.close()
+
+        print("Done")
+
+    def get_friends_by_id(self, user_id):
+        print("asd")
 
 
 DB_Manager = DatabaseManager()
