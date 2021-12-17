@@ -11,3 +11,12 @@ class User:
         self.password = data['password']
         self.status = 0
         self.time_registered = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+
+    def serialize(self):
+        return {
+            'ID': int(self.id),
+            'Username': self.username,
+            'Nickname': self.nickname,
+            'NicknameID': self.nickname_id,
+            'Status': int(self.status)
+        }
