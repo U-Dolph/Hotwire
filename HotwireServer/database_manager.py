@@ -50,9 +50,9 @@ class DatabaseManager:
             "time_registered": result[6]
         })
 
-    def get_user_by_nickname(self, nickname):
+    def get_user_by_id(self, id):
         _cursor = self.mysql.connection.cursor()
-        _cursor.execute("SELECT * FROM users WHERE Nickame=%s", (nickname,))
+        _cursor.execute("SELECT * FROM users WHERE ID=%s", (id,))
         result = _cursor.fetchall()
         _cursor.close()
 
@@ -63,6 +63,26 @@ class DatabaseManager:
             "nickname_id": result[3], "password": result[4], "status": result[5],
             "time_registered": result[6]
         })
+
+    def get_users_by_nickname(self, nickname):
+        look_for = "%" + nickname + "%"
+        _cursor = self.mysql.connection.cursor()
+        _cursor.execute("SELECT * FROM users WHERE NICKNAME LIKE %s", (look_for,))
+        result = _cursor.fetchall()
+        _cursor.close()
+
+        users = []
+
+        for row in result:
+            users.append(
+                User({
+                        "id": row[0], "username": row[1], "nickname": row[2],
+                        "nickname_id": row[3], "password": row[4], "status": row[5],
+                        "time_registered": row[6]
+                    })
+            )
+
+        return users
 
     def check_nickname(self, nickname):
         _cursor = self.mysql.connection.cursor()
@@ -108,22 +128,30 @@ class DatabaseManager:
         else:
             return "Invalid username"
 
-    def add_friend_by_nickname(self, user_id, nickname):
-        friend = self.get_user_by_nickname(nickname)
+    def add_friend(self, sender_id, receiver_id):
+        sender = self.get_user_by_id(sender_id)
+        receiver = self.get_user_by_id(receiver_id)
 
-        _cursor = self.mysql.connection.cursor()
-        _cursor.execute("INSERT INTO firendships(User_ID, Friend_ID, Pending , Date_Modified) "
-                        "VALUES (%s, %s, %s, %s, %s, %s)",
-                        (user_id, friend.id, 0,
-                         datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),))
+        if self.user_exists(sender.username) and self.user_exists(receiver.username):
+            _cursor = self.mysql.connection.cursor()
 
-        self.mysql.connection.commit()
-        _cursor.close()
+            try:
+                _cursor.execute("INSERT INTO friendships(User_ID, Friend_ID, Pending) "
+                                "VALUES (%s, %s, %s)",
+                                (int(sender.id), int(receiver.id), 0,))
 
-        print("Done")
+                self.mysql.connection.commit()
+            except Exception:
+                return False
+
+            _cursor.close()
+
+            return True
+        else:
+            return False
 
     def get_friends_by_id(self, user_id):
-        print("asd")
+        _cursor = self.mysql.connection.cursor()
 
 
 DB_Manager = DatabaseManager()
