@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response
+from flask import Blueprint, request, Response, make_response, jsonify
 from database_manager import DB_Manager
 from models.User import User
 
@@ -10,8 +10,8 @@ def register_user():
     data = request.get_json()
 
     if "username" not in data or "nickname" not in data or "password" not in data:
-        return Response("KO", 403)
+        return make_response(jsonify({"reason": "Invalid arguments"}), 403)
 
     result = DB_Manager.register_user(User(data))
 
-    return Response(result, 200 if result == "User registered" else 400)
+    return make_response(jsonify({"reason": result}), 200 if result == "User registered" else 400)
