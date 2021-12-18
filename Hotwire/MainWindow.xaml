@@ -7,11 +7,23 @@
         xmlns:view="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
         xmlns:viewModel="clr-namespace:Hotwire.ViewModel"
         mc:Ignorable="d"
-        Title="HotWire" Width="400" Height="625"
-        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Width="1200" Height="640"
+        WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize">
 
-    <DockPanel>
+
+    <Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="25"/>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+
+    <View:TitleBarView Grid.Row="0"/>
+    <DockPanel Grid.Row="1">
         <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
     </DockPanel>
+    </Grid>
+    
+
 </Window>
