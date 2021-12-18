@@ -58,3 +58,10 @@ def add_friend(friend_id):
     result = DB_Manager.add_friend(sender_id, friend_id)
 
     app_socket.emit('add_friend_completed', json.dumps(result), to=request.sid)
+
+
+@app_socket.on('get_friends_request')
+def get_friends():
+    sender_id = sessions[str(request.sid)]
+    results = DB_Manager.get_friends_by_id(sender_id)
+    app_socket.emit('friendlist_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
