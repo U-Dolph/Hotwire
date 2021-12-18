@@ -19,7 +19,7 @@
         <RowDefinition/>
     </Grid.RowDefinitions>
 
-    <View:TitleBarView Grid.Row="0"/>
+    <view:TitleBarView Grid.Row="0"/>
     <DockPanel Grid.Row="1">
         <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
     </DockPanel>
