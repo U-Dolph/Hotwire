@@ -28,13 +28,14 @@
                             BorderThickness="0"
                             Foreground="Gray"
                             FontWeight="Bold"/>
-                    
+
                     <Button Width="20" Height="20"
                             Content="X"
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold"
+                            Command="{Binding Path=ExitCommand}"/>
                 </StackPanel>
             </Grid>
         </Border>
