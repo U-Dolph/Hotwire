@@ -21,12 +21,11 @@
         <Label Content="Contacts"
                VerticalAlignment="Center"
                FontWeight="Medium"
-               Foreground="#FFFFFF"
-               Margin="10, 0, 0, 0"/>
+               Foreground="#FFFFFF"/>
 
         <!--CONTACTS-->
         <ListView ItemsSource="{Binding}"
-                  Background="#121212"
+                  Background="#36393F"
                   Grid.Row="1"/>
 
         <!--ADD FRIEND-->
@@ -42,7 +41,7 @@
                Foreground="#FFFFFF"/>
 
         <ListView ItemsSource="{Binding}"
-                  Background="#121212"
+                  Background="#36393F"
                   Grid.Column="1"
                   Grid.Row="1"
                   />

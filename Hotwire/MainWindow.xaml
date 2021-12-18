@@ -7,10 +7,10 @@
         xmlns:View="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
         mc:Ignorable="d"
         Title="HotWire" Width="400" Height="625"
-        Background="#121212"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
     <Grid>
+        <Border Background="#252525"/>
         <View:LoginView/>
     </Grid>
 </Window>
