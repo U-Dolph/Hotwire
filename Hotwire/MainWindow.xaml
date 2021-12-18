@@ -8,21 +8,20 @@
         xmlns:viewModel="clr-namespace:Hotwire.ViewModel"
         mc:Ignorable="d"
         WindowStyle="None"
-        Width="1200" Height="640"
+        Width="1200" Height="680"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize">
-
-
     <Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="25"/>
-        <RowDefinition/>
-    </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-    <view:TitleBarView Grid.Row="0"/>
-    <DockPanel Grid.Row="1">
-        <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
-    </DockPanel>
+        <view:TitleBarView Grid.Row="0"/>
+        
+        <DockPanel Grid.Row="1">
+            <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
+        </DockPanel>
     </Grid>
     
 

@@ -43,7 +43,6 @@
     <Style x:Key="txtBxStyle" TargetType="TextBox">
         <Setter Property="Width" Value="200"/>
         <Setter Property="Height" Value="50"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#E4F0FB"/>
         <Setter Property="Background" Value="#424242"/>
