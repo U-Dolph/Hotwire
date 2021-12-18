@@ -4,19 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotwire"
-        xmlns:View="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
+        xmlns:view="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
+        xmlns:viewModel="clr-namespace:Hotwire.ViewModel"
         mc:Ignorable="d"
+        WindowStyle="None"
         Width="1200" Height="640"
         WindowStartupLocation="CenterScreen" 
-        ResizeMode="CanMinimize"
-        WindowStyle="None">
-    <Grid> 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>    
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        
-        <View:TitleBarView Grid.Row="0"/>
-        <View:LoginView Grid.Row="1"/>
+        ResizeMode="CanMinimize">
+
+
+    <Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="25"/>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+
+    <view:TitleBarView Grid.Row="0"/>
+    <DockPanel Grid.Row="1">
+        <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
+    </DockPanel>
     </Grid>
+    
+
 </Window>

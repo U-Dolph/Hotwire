@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hotwire.ViewModel.Base;
+using Hotwire.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,9 @@ namespace Hotwire
         public MainWindow()
         {
             InitializeComponent();
+            var viewModel = new BaseViewModel();
+            viewModel.SelectedViewModel = new LoginViewModel(viewModel);
+            this.DataContext = viewModel;
         }
     }
 }
