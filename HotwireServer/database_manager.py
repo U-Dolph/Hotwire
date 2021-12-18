@@ -136,12 +136,13 @@ class DatabaseManager:
             _cursor = self.mysql.connection.cursor()
 
             try:
-                _cursor.execute("INSERT INTO friendships(User_ID, Friend_ID, Pending) "
+                _cursor.execute("INSERT INTO friendships(UserID1, UserID2, Pending) "
                                 "VALUES (%s, %s, %s)",
-                                (int(sender.id), int(receiver.id), 0,))
+                                (int(sender.id), int(receiver.id), 0, ))
 
                 self.mysql.connection.commit()
-            except Exception:
+            except Exception as ex:
+                print(ex)
                 return False
 
             _cursor.close()
@@ -152,6 +153,29 @@ class DatabaseManager:
 
     def get_friends_by_id(self, user_id):
         _cursor = self.mysql.connection.cursor()
+
+        query = "SELECT * FROM users u " \
+                "LEFT JOIN friendships f ON f.UserID2=u.ID WHERE f.UserID1 = %s " \
+                "UNION " \
+                "SELECT * FROM users u " \
+                "LEFT JOIN friendships f ON f.UserID1=u.ID WHERE f.UserID2 = %s " \
+
+        _cursor.execute(query, (user_id, user_id))
+
+        result = _cursor.fetchall()
+
+        users = []
+
+        for row in result:
+            users.append(
+                User({
+                    "id": row[0], "username": row[1], "nickname": row[2],
+                    "nickname_id": row[3], "password": row[4], "status": row[5],
+                    "time_registered": row[6]
+                })
+            )
+
+        return users
 
 
 DB_Manager = DatabaseManager()
