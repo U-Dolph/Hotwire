@@ -19,14 +19,16 @@
         <Label Content="Add friend"
                Grid.Column="0"
                Grid.Row="0"
-               Foreground="#FFFFFF"/>
+               Style="{StaticResource lblStyle}"/>
 
         <TextBox Text="Enter a Username#0000"
                  Grid.Column="0"
-                 Grid.Row="1"/>
+                 Grid.Row="1"
+                 Style="{StaticResource txtBxStyle}"/>
 
         <Button Content="Send friend request"
                 Grid.Column="1"
-                Grid.Row="1"/>
+                Grid.Row="1"
+                Style="{StaticResource bttnStyle}"/>
     </Grid>
 </UserControl>

@@ -3,8 +3,8 @@
                     xmlns:local="using:Hotwire">
     <!--LABEL STYLE-->
     <Style x:Key="lblStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="32"/>
-        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="Foreground" Value="#6E0DD0"/>
     </Style>
 
     <!--BUTTON STYLE-->
@@ -29,7 +29,7 @@
         <Setter Property="Height" Value="50"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="Foreground" Value="#E4F0FB"/>
         <Setter Property="Background" Value="#424242"/>
         <Setter Property="BorderBrush" Value="#424242"/>
         <Style.Resources>

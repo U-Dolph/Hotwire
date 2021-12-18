@@ -8,9 +8,9 @@
     <Grid>
         <StackPanel>
             <Label Content="Username"
-                   Foreground="#FFFFFF"/>
+                   Foreground="#E4F0FB"/>
             <Label Content="ID"
-                   Foreground="#FFFFFF"/>
+                   Foreground="#E4F0FB"/>
         </StackPanel>
     </Grid>
 </UserControl>

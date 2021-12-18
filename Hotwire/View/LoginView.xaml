@@ -20,7 +20,8 @@
         <StackPanel Grid.Row="0">
             <Label Content="Hotwire"
                    HorizontalAlignment="Center"
-                   Style="{StaticResource lblStyle}"/>
+                   Style="{StaticResource lblStyle}"
+                   Margin="0, 10, 0, 0"/>
 
             <Image Source="/Resources/hotwire_logo.png"
                    Width="150"

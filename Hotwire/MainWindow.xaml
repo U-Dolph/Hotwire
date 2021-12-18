@@ -10,7 +10,6 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
     <Grid>
-        <Border Background="#252525"/>
         <View:LoginView/>
     </Grid>
 </Window>

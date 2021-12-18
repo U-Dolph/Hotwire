@@ -21,7 +21,7 @@
         <Label Content="Contacts"
                VerticalAlignment="Center"
                FontWeight="Medium"
-               Foreground="#FFFFFF"/>
+               Foreground="#E4F0FB"/>
 
         <!--CONTACTS-->
         <ListView ItemsSource="{Binding}"
@@ -38,7 +38,7 @@
         <!--MESSAGES-->
         <Label Content="@Username"
                Grid.Column="1"
-               Foreground="#FFFFFF"/>
+               Foreground="#E4F0FB"/>
 
         <ListView ItemsSource="{Binding}"
                   Background="#36393F"
