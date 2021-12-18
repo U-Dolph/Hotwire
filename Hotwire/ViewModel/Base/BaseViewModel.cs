@@ -1,11 +1,16 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 
 namespace Hotwire.ViewModel.Base
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
         public RelayCommand ExitCommand { get; }
+        public RelayCommand MaximizeCommand { get; }
+        public RelayCommand MinimizeCommand { get; }
+
         private object selectedViewModel;
+        private WindowState windowState;
 
         public object SelectedViewModel
         {
@@ -20,8 +25,21 @@ namespace Hotwire.ViewModel.Base
             }
         }
 
+        public WindowState WindowState
+        {
+            get { return windowState; }
+            set
+            {
+                windowState = value;
+                OnPropertyChanged("WindowState");
+            }
+        }
+
         public BaseViewModel()
         {
+            windowState = WindowState.Normal;
+            MaximizeCommand = new RelayCommand(maximize);
+            MinimizeCommand = new RelayCommand(minimize);
             ExitCommand = new RelayCommand(exit);
         }
 
@@ -37,7 +55,17 @@ namespace Hotwire.ViewModel.Base
 
         private void exit()
         {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
+        }
+
+        private void maximize()
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; 
+        }
+
+        private void minimize()
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

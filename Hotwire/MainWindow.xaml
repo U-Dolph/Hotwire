@@ -8,7 +8,8 @@
         xmlns:viewModel="clr-namespace:Hotwire.ViewModel"
         mc:Ignorable="d"
         WindowStyle="None"
-        Width="1200" Height="680"
+        Width="1200" Height="640"
+        WindowState="{Binding WindowState, Mode=TwoWay}"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize">
     <Grid>

@@ -20,14 +20,16 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold"
+                            Command="{Binding Path=MinimizeCommand}"/>
 
                     <Button Width="20" Height="20"
-                            Content="O"
+                            Content="□"
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold"
+                            Command="{Binding Path=MaximizeCommand}"/>
 
                     <Button Width="20" Height="20"
                             Content="X"
