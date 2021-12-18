@@ -30,11 +30,13 @@
         <StackPanel Grid.Row="1">
             <TextBox Text="Username"
                      Margin="10, 10, 10, 0"
-                     Style="{StaticResource txtBxStyle}"/>
+                     Style="{StaticResource txtBxStyle}"
+                     VerticalContentAlignment="Center"/>
 
             <TextBox Text="Nickname"
                      Margin="10, 10, 10, 0"
-                     Style="{StaticResource txtBxStyle}"/>
+                     Style="{StaticResource txtBxStyle}"
+                     VerticalContentAlignment="Center"/>
 
             <PasswordBox
                  Grid.Row="3"
@@ -75,7 +77,8 @@
         
         <Label Grid.Row="4"
                HorizontalAlignment="Center"
-               FontSize="16">
+               FontSize="16"
+               Margin="0, 0, 0, 20">
             <Hyperlink Command="{Binding Path=SwitchToLoginPageCommand}">
                 Already have an account? Sign in!
             </Hyperlink>

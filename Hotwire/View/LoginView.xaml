@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hotwire.View"
              mc:Ignorable="d"
              Background="#121212">
-    <Grid>
+    <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -33,7 +33,8 @@
         <TextBox Text="Username"
                  Grid.Row="1"
                  Margin="10, 10, 10, 0"
-                 Style="{StaticResource txtBxStyle}"/>
+                 Style="{StaticResource txtBxStyle}"
+                 VerticalContentAlignment="Center"/>
         
         <PasswordBox 
                  Grid.Row="2"
