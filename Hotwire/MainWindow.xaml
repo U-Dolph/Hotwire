@@ -6,10 +6,17 @@
         xmlns:local="clr-namespace:Hotwire"
         xmlns:View="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
         mc:Ignorable="d"
-        Title="HotWire" Width="400" Height="625"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize">
+        Width="1200" Height="640"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanMinimize"
+        WindowStyle="None">
     <Grid>
-        <View:LoginView/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <View:TitleBarView Grid.Row="0"/>
+        <View:LoginView Grid.Row="1"/>
     </Grid>
 </Window>
