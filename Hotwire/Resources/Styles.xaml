@@ -54,6 +54,13 @@
         </Style.Resources>
     </Style>
 
+    <!--PLACEHOLDER TEXT STYLE-->
+    <Style x:Key="AdornerTextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+    </Style>
+
     <!--PASSWORDBOX STYLE-->
     <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
         <Border CornerRadius="5" Background="#424242" BorderThickness="1" Padding="2">
