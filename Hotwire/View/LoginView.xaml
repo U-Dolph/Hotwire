@@ -18,11 +18,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <Label Content="Welcome to HotWire!"
+            <Label Content="Hotwire"
                    HorizontalAlignment="Center"
                    Style="{StaticResource lblStyle}"/>
 
-            <Image Source="/Resources/logo.png"
+            <Image Source="/Resources/hotwire_logo.png"
                    Width="150"
                    Height="150"
                    Margin="0, 25, 0, 25"/>
