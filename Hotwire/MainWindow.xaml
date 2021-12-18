@@ -11,25 +11,6 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <Label Content="Welcome to HotWire!"
-                   HorizontalAlignment="Center"
-                   Style="{StaticResource lblStyle}"/>
-
-            <Image Source="Resources/logo.png"
-                   Width="150"
-                   Height="150"
-                   Margin="0, 25, 0, 25"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <View:LoginView/>
-        </StackPanel>
-
+        <View:LoginView/>
     </Grid>
 </Window>

@@ -46,7 +46,7 @@
             <!--PASSWORDBOX STYLE-->
             <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
                 <Border CornerRadius="5" Background="#424242" BorderThickness="1" Padding="2">
-                    <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                    <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
                 </Border>
             </ControlTemplate>
 
