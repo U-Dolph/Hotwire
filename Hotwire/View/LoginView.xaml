@@ -68,7 +68,7 @@
         <Label Grid.Row="6"
                HorizontalAlignment="Center"
                FontSize="16">
-            <Hyperlink NavigateUri="http://www.google.com">
+            <Hyperlink Command="{Binding Path=SwitchToRegisterPageCommand}">
                 Don't have an account? Create one!
             </Hyperlink>
         </Label>
