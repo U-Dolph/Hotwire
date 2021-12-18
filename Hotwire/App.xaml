@@ -19,7 +19,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="White" BorderThickness="1" Padding="2">
+                            <Border CornerRadius="5" Background="#BB86FC" BorderThickness="1" Padding="2">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -33,6 +33,9 @@
                 <Setter Property="Height" Value="50"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+                <Setter Property="Background" Value="#424242"/>
+                <Setter Property="BorderBrush" Value="#424242"/>
                 <Style.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -42,7 +45,7 @@
 
             <!--PASSWORDBOX STYLE-->
             <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
-                <Border CornerRadius="5" Background="White" BorderThickness="1" Padding="2">
+                <Border CornerRadius="5" Background="#424242" BorderThickness="1" Padding="2">
                     <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                 </Border>
             </ControlTemplate>

@@ -6,16 +6,7 @@
              xmlns:local="clr-namespace:Hotwire.View"
              mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-
-        <Label Content="Kép helye"
-               Grid.Column="0"
-               Foreground="#FFFFFF"/>
-
-        <StackPanel Grid.Column="1">
+        <StackPanel>
             <Label Content="Username"
                    Foreground="#FFFFFF"/>
             <Label Content="ID"
