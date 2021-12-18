@@ -49,7 +49,8 @@
         <Button Content="Login"
                 Grid.Row="3"
                 Margin="10, 25, 10, 10"
-                Style="{StaticResource bttnStyle}"/>
+                Style="{StaticResource bttnStyle}"
+                />
 
         <CheckBox Content="Stay signed in"
                   Grid.Row="4"
@@ -63,7 +64,7 @@
                FontSize="14"
                HorizontalAlignment="Center"
                Foreground="Red"
-               Visibility="Visible"/>
+               Visibility="Hidden"/>
 
         <Label Grid.Row="6"
                HorizontalAlignment="Center"

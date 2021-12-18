@@ -7,11 +7,8 @@
              mc:Ignorable="d"
              Background="#121212">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -53,22 +50,20 @@
                FontSize="14"
                HorizontalAlignment="Center"
                Foreground="Red"
-               Visibility="Visible"/>
-        
+               Visibility="Hidden"/>
+
         <Button Content="Register"
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="10, 10, 10, 10"
                 Style="{StaticResource bttnStyle}"/>
-
-        <Button Content="Back"
-                Grid.Column="1"
-                Grid.Row="0"
-                Margin="5, 5, 5, 0"
-                Width="50"
-                Height="50"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Style="{StaticResource bttnStyle}"/>
+        
+        <Label Grid.Row="5"
+               HorizontalAlignment="Center"
+               FontSize="16">
+            <Hyperlink NavigateUri="http://www.google.com">
+                Already have an account? Sign in!
+            </Hyperlink>
+        </Label>
     </Grid>
 </UserControl>

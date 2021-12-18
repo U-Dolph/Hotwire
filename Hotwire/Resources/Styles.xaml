@@ -9,6 +9,7 @@
 
     <!--BUTTON STYLE-->
     <Style x:Key="bttnStyle" TargetType="Button">
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Width" Value="200"/>
         <Setter Property="Height" Value="50"/>
         <Setter Property="FontSize" Value="18"/>
@@ -21,6 +22,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#E4F0FB"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="#d81758" BorderThickness="1" Padding="2">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!--TEXTBOX STYLE-->

@@ -10,9 +10,9 @@
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize"
         WindowStyle="None">
-    <Grid>
+    <Grid> 
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>    
             <RowDefinition/>
         </Grid.RowDefinitions>
         
