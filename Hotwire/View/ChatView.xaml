@@ -15,44 +15,63 @@
             
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <StackPanel Grid.Row="0">
             <Label Content="Username ID's Contacts"
                VerticalAlignment="Center"
                FontWeight="Medium"
                Foreground="#E4F0FB"/>
+            <!--CONTACTS-->
+            <ListView Background="#252525"
+                Height="200"
+                ItemContainerStyle="{StaticResource ContactCardStyle}">
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+            </ListView>
+
+            <!--ADD FRIEND-->
+            <local:AddFriendView Grid.Row="2"/>
         </StackPanel>
 
-        <!--CONTACTS-->        
-        <ListView ItemsSource="{Binding}"
-                  Background="#36393F"
-                  Grid.Row="1"/>
-
-        <!--ADD FRIEND-->
-        <Button Content="Add Friend"
-                Grid.Row="2"
-                Style="{StaticResource bttnStyle}"
-                Margin="10, 0, 10, 0"/>
-
         <!--MESSAGES-->
-        <Label Content="@Username"
-               Grid.Column="1"
+        <StackPanel Grid.Column="1" Width="500">
+            <Label Content="@Username"
                Foreground="#E4F0FB"/>
+            <ListView Background="#252525"
+                Height="400"
+                ItemContainerStyle="{StaticResource ChatMsg}">
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+                <ListViewItem/>
+            </ListView>
+        </StackPanel>
 
-        <ListView ItemsSource="{Binding}"
-                  Background="#36393F"
-                  Grid.Column="1"
-                  Grid.Row="1"/>
-        
         <TextBox adorners:Watermark.Text="Message @Username"
                  adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
-                 Margin="10, 10, 10, 10"
                  Style="{StaticResource txtBxStyle}"
                  VerticalContentAlignment="Center"
-                 Grid.Row="2"
-                 Grid.Column="1"/>
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="10, 0, 10, 0"
+                 Width="500"/>
+
+        <Button Content="Sign out"
+                Grid.Row="1"
+                Style="{StaticResource bttnStyle}"
+                Margin="0, 10, 0, 10"/>
     </Grid>
 </Page>

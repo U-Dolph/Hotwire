@@ -67,4 +67,56 @@
             <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
         </Border>
     </ControlTemplate>
+    
+    <!--CONTACTS STYLE-->
+    <Style TargetType="ListViewItem" x:Key="ContactCardStyle">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#292b2f"/>
+            </Trigger>
+        </Style.Triggers>
+
+        <Setter Property="Background" Value="#393B40"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="5" Margin="5, 5, 5, 5">
+                        <StackPanel>
+                            <Label Content="Username"
+                                       Foreground="White"/>
+                            <Label Content="Last Message"
+                                       Foreground="Gray"
+                                       FontSize="10"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--MESSAGES STYLE-->
+    <Style TargetType="ListViewItem" x:Key="ChatMsg">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <Label Content="Username"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               Margin="0, 0, -5, 0"/>
+
+                            <Border Background="Azure" CornerRadius="5">
+                                <Label Content="Message"
+                                       Foreground="gray"
+                                       Margin="0, 0, -5, 0"/>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>           
 </ResourceDictionary>
