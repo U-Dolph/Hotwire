@@ -18,7 +18,7 @@ namespace Hotwire.View
     /// <summary>
     /// Interaction logic for ChatView.xaml
     /// </summary>
-    public partial class ChatView : Page
+    public partial class ChatView : UserControl
     {
         public ChatView()
         {

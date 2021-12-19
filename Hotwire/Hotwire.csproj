@@ -93,12 +93,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Messange.cs" />
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\WebSocketService.cs" />
-    <Compile Include="ViewModel\AddFriendViewModel.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
@@ -131,6 +130,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\CustomScrollBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

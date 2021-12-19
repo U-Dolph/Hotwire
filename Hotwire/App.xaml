@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles.xaml"/>
                 <ResourceDictionary Source="Resources/DataTemplate.xaml"/>
+                <ResourceDictionary Source="Resources/CustomScrollBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -14,13 +14,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="Add friend"
-               VerticalAlignment="Center"
+        <Label Content="Add friend"               
                FontWeight="Medium"
                Foreground="#E4F0FB"/>
-        
+
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBox adorners:Watermark.Text="Username#ID"
+            <TextBox adorners:Watermark.Text="Username#ID"                     
                      adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
                      Style="{StaticResource txtBxStyle}"
                      VerticalContentAlignment="Center"
@@ -28,11 +27,11 @@
 
             <Button Content="Add Friend"
                 Style="{StaticResource bttnStyle}"/>
-        </StackPanel>
 
-        <Label Content="Friend not found!"
+            <Label Content="Friend not found!"
                 Grid.Row="2"
                 Foreground="Red"
                 HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </UserControl>

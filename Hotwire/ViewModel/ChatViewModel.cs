@@ -16,10 +16,5 @@ namespace Hotwire.ViewModel
         {
             this.viewModel = viewModel;
         }
-
-        private void switchToAddFriendPage()
-        {
-            viewModel.SelectedViewModel = new AddFriendViewModel(viewModel);
-        }
     }
 }
