@@ -6,7 +6,12 @@
     <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
         <view:LoginView/>
     </DataTemplate>
+    
     <DataTemplate DataType="{x:Type viewModel:RegisterViewModel}">
         <view:RegisterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModel:ChatViewModel}">
+        <view:ChatView/>
     </DataTemplate>
 </ResourceDictionary>
