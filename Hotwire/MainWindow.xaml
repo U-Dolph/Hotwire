@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Hotwire"
         xmlns:view="clr-namespace:Hotwire.View" x:Class="Hotwire.MainWindow"
         xmlns:viewModel="clr-namespace:Hotwire.ViewModel"
+        Icon="Resources\hotwire_logo.png"
         mc:Ignorable="d"
         WindowStyle="None"
         Width="1200" Height="640"
