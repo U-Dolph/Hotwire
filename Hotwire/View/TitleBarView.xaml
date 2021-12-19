@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:Hotwire.View"
              mc:Ignorable="d">
     <Grid>
-        <Border Grid.ColumnSpan="2"
-                Background="#252525">
+        <Border Background="#252525">
             <Grid HorizontalAlignment="Stretch">
                 <Label Content="Hotwire"
                        Foreground="Gray"
@@ -16,7 +15,7 @@
                 <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal">
                     <Button Width="20" Height="20"
-                            Content="_"
+                            Content="🗕"
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
@@ -24,7 +23,7 @@
                             Command="{Binding Path=MinimizeCommand}"/>
 
                     <Button Width="20" Height="20"
-                            Content="□"
+                            Content="🗖"
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
@@ -32,7 +31,7 @@
                             Command="{Binding Path=MaximizeCommand}"/>
 
                     <Button Width="20" Height="20"
-                            Content="X"
+                            Content="✖"
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
