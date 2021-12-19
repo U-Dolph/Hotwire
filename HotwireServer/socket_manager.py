@@ -65,3 +65,30 @@ def get_friends():
     sender_id = sessions[str(request.sid)]
     results = DB_Manager.get_friends_by_id(sender_id)
     app_socket.emit('friendlist_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
+
+
+@app_socket.on('get_all_messages_request')
+def get_all_messages():
+    sender_id = sessions[str(request.sid)]
+    results = DB_Manager.get_all_messages_by_id(sender_id)
+    app_socket.emit('message_list_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
+
+
+@app_socket.on('get_messages_with_given_user_request')
+def get_messages_with_user(friend_id):
+    sender_id = sessions[str(request.sid)]
+    results = DB_Manager.get_messages_with_give_user(sender_id, friend_id)
+    app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
+
+
+@app_socket.on('send_message_to_user')
+def send_message(receiver_id, content):
+    sender_id = sessions[str(request.sid)]
+    DB_Manager.send_message_to_user(sender_id, receiver_id, content)
+    
+    if receiver_id in sessions.values():
+        receiver_session = list(sessions.keys())[list(sessions.values()).index(receiver_id)]
+        app_socket.emit('new_message', to=receiver_session)
+
+    results = DB_Manager.get_messages_with_give_user(sender_id, receiver_id)
+    app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
