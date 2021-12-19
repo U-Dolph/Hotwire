@@ -17,6 +17,6 @@ class User:
             'ID': int(self.id),
             'Username': self.username,
             'Nickname': self.nickname,
-            'NicknameID': self.nickname_id,
+            'NicknameID': int(self.nickname_id),
             'Status': int(self.status)
         }
