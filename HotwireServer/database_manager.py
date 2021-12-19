@@ -138,9 +138,10 @@ class DatabaseManager:
             _cursor = self.mysql.connection.cursor()
 
             try:
-                _cursor.execute("INSERT INTO friendships(UserID1, UserID2, Pending) "
-                                "VALUES (%s, %s, %s)",
-                                (int(sender.id), int(receiver.id), 0, ))
+                _cursor.execute("INSERT INTO friendships(UserID1, UserID2, Pending, Time_Since) "
+                                "VALUES (%s, %s, %s, %s)",
+                                (int(sender.id), int(receiver.id), 0,
+                                 datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), ))
 
                 self.mysql.connection.commit()
             except Exception as ex:
