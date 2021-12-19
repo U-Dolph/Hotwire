@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Hotwire.View"
       xmlns:adorners="http://gu.se/Adorners"
       mc:Ignorable="d"
-      Background="#252525">
+      Background="#121212">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
                Foreground="#E4F0FB"/>
             
             <!--CONTACTS-->
-            <ListView Background="#252525"
+            <ListView Background="#121212"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
                 ItemContainerStyle="{StaticResource ContactCardStyle}">
@@ -68,7 +68,7 @@
                Grid.Row="0"/>
 
             <!--MESSAGES-->
-            <ListView Background="#252525"
+            <ListView Background="#121212"
                       VerticalAlignment="Stretch"
                   Grid.Row="1"
                 ItemContainerStyle="{StaticResource ChatMsg}">
