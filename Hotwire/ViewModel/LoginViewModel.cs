@@ -10,17 +10,24 @@ namespace Hotwire.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         public RelayCommand SwitchToRegisterPageCommand { get; }
-        private readonly BaseViewModel _viewModel;
+        public RelayCommand SwitchToChatPageCommand { get; }
+        private readonly BaseViewModel viewModel;
 
         public LoginViewModel(BaseViewModel viewModel)
         {
-            _viewModel = viewModel;
+            this.viewModel = viewModel;
             SwitchToRegisterPageCommand = new RelayCommand(switchToRegisterPage);
+            SwitchToChatPageCommand = new RelayCommand(switchToChatPage);
         }
 
         private void switchToRegisterPage()
         {
-            _viewModel.SelectedViewModel = new RegisterViewModel(_viewModel); 
+            viewModel.SelectedViewModel = new RegisterViewModel(viewModel); 
+        }
+
+        private void switchToChatPage()
+        {
+            viewModel.SelectedViewModel = new ChatViewModel(viewModel);
         }
     }
 }
