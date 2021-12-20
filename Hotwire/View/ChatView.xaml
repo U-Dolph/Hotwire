@@ -24,18 +24,17 @@
 
             <Label Content="Username ID's Contacts"
                Grid.Row="0"
-               FontWeight="Medium"
-               Foreground="#E4F0FB"/>
+               FontWeight="Bold"
+               Foreground="#E4F0FB"
+                   Margin="5, 0, 10, 0"/>
             
             <!--CONTACTS-->
-            <ListView Background="#121212"
+            <ListView Background="#222222"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
+                      Margin="10, 0, 10, 0"
+                      BorderBrush="#555555"
                 ItemContainerStyle="{StaticResource ContactCardStyle}">
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
                 <ListViewItem/>
                 <ListViewItem/>
                 <ListViewItem/>
@@ -65,12 +64,16 @@
 
             <Label Content="@Username"
                Foreground="#E4F0FB"
-               Grid.Row="0"/>
+               Grid.Row="0"
+                   FontWeight="Bold"
+                   Margin="5, 0, 10, 0"/>
 
             <!--MESSAGES-->
-            <ListView Background="#121212"
+            <ListView Background="#222222"
                       VerticalAlignment="Stretch"
                   Grid.Row="1"
+                      Margin="10, 0, 10, 0"
+                      BorderBrush="#555555"
                 ItemContainerStyle="{StaticResource ChatMsg}">
                 <ListViewItem/>
                 <ListViewItem/>
@@ -80,26 +83,17 @@
                 <ListViewItem/>
                 <ListViewItem/>
                 <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
+
             </ListView>
 
 
             <TextBox adorners:Watermark.Text="Message @Username"
                  adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
-                 VerticalContentAlignment="Center"
-                     Margin="0, 10, 0, 10"
-                 FontSize="18"
-                 Foreground="White"
-                 Background="#424242"
-                 BorderBrush="#424242"
                      Grid.Row="2"
-                     Height="50"/>
+                     Style="{StaticResource msgBxStyle}"
+                     Height="50"
+                     Margin="10, 10, 10, 10"
+                     VerticalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>
