@@ -50,12 +50,12 @@ namespace Hotwire.ViewModel
             RegisterButtonEnabled = false;
             LabelMessage = " ";
 
-            if (Password == null || RePassword == null || Password != RePassword || Password.Length < 1 || RePassword.Length < 1)
-                LabelMessage = "Passwords must be the same!";
-            else if (Nickname == null || Nickname.Length < 5)
-                LabelMessage = "The nickname must be longer than 5 characters!";
-            else if (Username == null || Username.Length < 5)
+            if (Username == null || Username.Length < 3)
                 LabelMessage = "The username must be longer than 5 characters!";
+            else if (Nickname == null || Nickname.Length < 3)
+                LabelMessage = "The nickname must be longer than 5 characters!";
+            else if (Password == null || RePassword == null || Password != RePassword || Password.Length < 1 || RePassword.Length < 1)
+                LabelMessage = "Passwords must be the same!";
             else
                 LabelMessage = await App.HttpService.RegisterUser(new User(Username, Nickname, Password));
 

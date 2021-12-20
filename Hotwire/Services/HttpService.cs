@@ -42,17 +42,19 @@ namespace Hotwire.Services
             try
             {
                 HttpResponseMessage msg = await client.PostAsync(Constants.LoginUrl, content);
-                try
-                {
-                    Token token = JsonConvert.DeserializeObject<Token>(msg.Content.ReadAsStringAsync().Result);
-                }
-                catch (Exception)
-                {
 
+                if (msg.IsSuccessStatusCode)
+                {
+                    try
+                    {
+                        Token token = JsonConvert.DeserializeObject<Token>(msg.Content.ReadAsStringAsync().Result);
+                        return "Login successful!";
+                    }
+                    catch (Exception)
+                    {
+                        return "Something went wrong :(";
+                    }
                 }
-
-                //if (msg.IsSuccessStatusCode)
-                //    request_socket(token);
 
                 return msg.Content.ReadAsStringAsync().Result;
             }

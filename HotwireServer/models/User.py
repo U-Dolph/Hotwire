@@ -1,10 +1,9 @@
 import datetime
-import hashlib
 
 
 class User:
     def __init__(self, data):
-        self.id = data['id'] if 'id' in data.keys() else None
+        self.id = data['ID'] if 'ID' in data.keys() else None
         self.username = data['Username']
         self.nickname = data['Nickname']
         self.nickname_id = 0

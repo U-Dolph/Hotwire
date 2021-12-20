@@ -20,12 +20,16 @@ namespace Hotwire.ViewModel
         public string Password { get; set; }
         public bool StayLoggedIn { get; set; }
 
+        public bool LoginButtonEnabled { get; set; }
+
         public LoginViewModel(BaseViewModel viewModel)
         {
             this.viewModel = viewModel;
-            LabelMessage = "Cigány";
+            LabelMessage = " ";
             SwitchToRegisterPageCommand = new RelayCommand(switchToRegisterPage);
             SwitchToChatPageCommand = new RelayCommand(login);
+
+            LoginButtonEnabled = true;
         }
 
         private void switchToRegisterPage()
@@ -39,17 +43,18 @@ namespace Hotwire.ViewModel
         }
         private async void login()
         {
-            //RegisterButtonEnabled = false;
+            LoginButtonEnabled = false;
             LabelMessage = " ";
 
-            if (Password == null  || Password.Length < 1 )
-                LabelMessage = "Please enter your password";
-            else if (Username == null || Username.Length < 1)
+            if (Username == null || Username.Length < 1)
                 LabelMessage = "Please enter your username";
+            else if (Password == null || Password.Length < 1 )
+                LabelMessage = "Please enter your password";
+
             else
                 LabelMessage = await App.HttpService.LoginUser(new User(Username, Password, StayLoggedIn));
 
-            //RegisterButtonEnabled = true;
+            LoginButtonEnabled = true;
         }
     }
 }

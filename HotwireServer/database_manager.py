@@ -105,9 +105,9 @@ class DatabaseManager:
         result = result[0]
 
         return User({
-            "id": result[0], "username": result[1], "nickname": result[2],
-            "nickname_id": result[3], "password": result[4], "status": result[5],
-            "time_registered": result[6]
+            "ID": result[0], "Username": result[1], "Nickname": result[2],
+            "NicknameID": result[3], "Password": result[4], "Status": result[5],
+            "TimeRegistered": result[6]
         })
 
     def get_users_by_nickname(self, nickname):
