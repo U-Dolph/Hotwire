@@ -48,7 +48,10 @@ namespace Hotwire.Services
                     try
                     {
                         Token token = JsonConvert.DeserializeObject<Token>(msg.Content.ReadAsStringAsync().Result);
-                        return "Login successful!";
+
+                        requestSocket(token);
+
+                        return "Login successful";
                     }
                     catch (Exception)
                     {
@@ -64,32 +67,29 @@ namespace Hotwire.Services
             }
         }
 
-        //private async void request_socket(Token token)
-        //{
-        //    client.DefaultRequestHeaders.Clear();
-        //    client.DefaultRequestHeaders.Add("x-access-token", token.Body);
+        private async void requestSocket(Token token)
+        {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("x-access-token", token.Body);
 
-        //    try
-        //    {
-        //        HttpResponseMessage msg = await client.PostAsync("http://dolphvault.duckdns.org:1234/request_socket", new StringContent(String.Empty));
+            try
+            {
+                HttpResponseMessage msg = await client.PostAsync(Constants.SocketUrl, new StringContent(String.Empty));
 
-        //        if (msg.StatusCode == System.Net.HttpStatusCode.OK)
-        //        {
-        //            try
-        //            {
-        //                .Instance.SocketTicket = msg.Content.ReadAsStringAsync().Result;
-        //                await SocketHandler.Instance.SocketClient.ConnectAsync();
-        //            }
-        //            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        //        }
-
-        //        Invoke((MethodInvoker)(() => socketLabel.Text = $"{msg.StatusCode}; {msg.Content.ReadAsStringAsync().Result}"));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error");
-        //    }
-
-        //}
+                if (msg.IsSuccessStatusCode)
+                {
+                    try
+                    {
+                        string socketTicket = msg.Content.ReadAsStringAsync().Result;
+                        App.WebSocketService.ConnectToServer(socketTicket);
+                        
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
     }
 }

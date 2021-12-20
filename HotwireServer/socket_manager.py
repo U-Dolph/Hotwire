@@ -25,7 +25,7 @@ def disconnecting():
         sessions.pop(str(request.sid))
 
 
-@app_socket.on('give_ticket')
+@app_socket.on('authorize_ticket')
 def handle_ticket(ticket):
     print(request.sid + " sent a ticket")
     ticket = json.loads(ticket)
@@ -35,6 +35,7 @@ def handle_ticket(ticket):
             print("valid ticket")
             sessions[str(request.sid)] = ticket['user_id']
             print(sessions)
+            app_socket.emit('ticket_accepted', to=request.sid)
         else:
             print("ticket expired")
             app_socket.emit('close_connection', to=request.sid)

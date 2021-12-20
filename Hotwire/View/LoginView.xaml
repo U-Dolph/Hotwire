@@ -65,7 +65,7 @@
                 Grid.Row="5"
                 Margin="0, 10, 0, 10"
                 Style="{StaticResource bttnStyle}"
-                Command="{Binding Path=SwitchToChatPageCommand}"/>
+                Command="{Binding Path=LoginCommand}"/>
 
         <CheckBox Content="Stay signed in"
                   Grid.Row="3"
@@ -74,7 +74,7 @@
                   Margin="0, 10, 0, 10"
                   IsChecked="{Binding Path=StayLoggedIn}"/>
 
-        <!--LOGIN ERROR MESSAGE-->        
+        <!--LOGIN ERROR MESSAGE-->
         <Label Content="{Binding Path=LabelMessage}"
                Grid.Row="4"
                FontSize="14"

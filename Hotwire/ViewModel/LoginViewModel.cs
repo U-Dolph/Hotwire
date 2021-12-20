@@ -2,16 +2,18 @@
 using Hotwire.ViewModel.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Hotwire.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
         public RelayCommand SwitchToRegisterPageCommand { get; }
-        public RelayCommand SwitchToChatPageCommand { get; }
+        public RelayCommand LoginCommand { get; }
 
         private readonly BaseViewModel viewModel;
 
@@ -27,8 +29,7 @@ namespace Hotwire.ViewModel
             this.viewModel = viewModel;
             LabelMessage = " ";
             SwitchToRegisterPageCommand = new RelayCommand(switchToRegisterPage);
-            SwitchToChatPageCommand = new RelayCommand(login);
-
+            LoginCommand = new RelayCommand(login);
             LoginButtonEnabled = true;
         }
 
@@ -53,6 +54,9 @@ namespace Hotwire.ViewModel
 
             else
                 LabelMessage = await App.HttpService.LoginUser(new User(Username, Password, StayLoggedIn));
+
+            if (LabelMessage == "Login successful")
+                switchToChatPage();
 
             LoginButtonEnabled = true;
         }

@@ -27,7 +27,7 @@ namespace Hotwire
             InitializeComponent();
             var viewModel = new BaseViewModel();
             viewModel.SelectedViewModel = new LoginViewModel(viewModel);
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
     }
 }

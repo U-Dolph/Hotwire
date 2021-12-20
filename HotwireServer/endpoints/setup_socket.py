@@ -23,4 +23,5 @@ def request_socket():
     }
 
     ticket_cache.append(token)
+    print(token)
     return make_response(jsonify(token), 200)

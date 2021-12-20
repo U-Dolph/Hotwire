@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace Hotwire.ViewModel
 {
-    public class RegisterViewModel : BaseViewModel, INotifyPropertyChanged
+    public class RegisterViewModel : BaseViewModel
     {
         public RelayCommand SwitchToLoginPageCommand { get; }
         public RelayCommand RegisterCommand { get; }

@@ -10,6 +10,7 @@ login_page = Blueprint('login_page', __name__)
 @login_page.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
+    print(data)
 
     if 'Username' in data and 'Password' in data:
         result = DB_Manager.check_credentials(data['Username'], data['Password'])
