@@ -14,6 +14,7 @@ namespace Hotwire.Services
         private string socketTicket;
         public List<User> Friends { get; set; }
         public string Response { get; set; }
+        public User CurrentUser { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -28,9 +29,10 @@ namespace Hotwire.Services
                 await client.EmitAsync("authorize_ticket", socketTicket);
             };
 
-            client.On("ticket_accepted", response => 
+            client.On("ticket_accepted", async response => 
             {
                 Connected = true;
+                await client.EmitAsync("get_identity_request");
             });
 
             client.On("friendlist_result", response =>
@@ -42,6 +44,11 @@ namespace Hotwire.Services
             {
                 await client.EmitAsync("get_friends_request");
                 Response = response.GetValue<string>();
+            });
+
+            client.On("identity_result", response =>
+            {
+                CurrentUser = JsonConvert.DeserializeObject<User>(response.GetValue<string>());
             });
         }
 

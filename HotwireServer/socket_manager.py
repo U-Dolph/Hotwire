@@ -68,6 +68,13 @@ def get_friends():
     app_socket.emit('friendlist_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
 
 
+@app_socket.on('get_identity_request')
+def get_identity():
+    sender_id = sessions[str(request.sid)]
+    result = DB_Manager.get_user_by_id(sender_id)
+    app_socket.emit('identity_result', json.dumps(result.serialize()), room=request.sid)
+
+
 @app_socket.on('get_all_messages_request')
 def get_all_messages():
     sender_id = sessions[str(request.sid)]

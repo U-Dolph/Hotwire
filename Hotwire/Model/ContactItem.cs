@@ -8,12 +8,12 @@ namespace Hotwire.Model
 {
     public class ContactItem
     {
-        public string Username { get; set; }
+        public string Nickname { get; set; }
         public string LastMessage { get; set; }
 
-        public ContactItem(string username, string lastMessage)
+        public ContactItem(string nickname,int nicknameID, string lastMessage)
         {
-            Username = username;
+            Nickname = $"{nickname}#{nicknameID}";
             LastMessage = lastMessage;
         }
     }

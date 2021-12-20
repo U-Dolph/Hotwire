@@ -6,7 +6,7 @@ class User:
         self.id = data['ID'] if 'ID' in data.keys() else None
         self.username = data['Username']
         self.nickname = data['Nickname']
-        self.nickname_id = 0
+        self.nickname_id = data['NicknameID'] if 'NicknameID' in data.keys() else 0
         self.password = data['Password'] if 'Password' in data.keys() else ""
         self.status = 0
         self.time_registered = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')

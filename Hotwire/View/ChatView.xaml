@@ -22,12 +22,14 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Username ID's Contacts"
+            <Label
+               Content="{Binding Path=Nickname}"
+               ContentStringFormat=" {0}'s contacts"
                Grid.Row="0"
                FontWeight="Bold"
                Foreground="#E4F0FB"
-                   Margin="5, 0, 10, 0"/>
-            
+               Margin="5, 0, 10, 0"/>
+
             <!--CONTACTS-->
             <ListView Background="#222222"
                   VerticalAlignment="Stretch"
@@ -39,8 +41,39 @@
             </ListView>
 
             <!--ADD FRIEND-->
-            <local:AddFriendView Grid.Row="2"/>
-            
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Add a friend"
+                   Grid.Row="0"
+                   FontWeight="Bold"
+                   Foreground="#E4F0FB"
+                   Margin="5, 0, 10, 0"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <TextBox adorners:Watermark.Text="Username#ID"                     
+                     adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                     Text="{Binding Path=AddFriendInput}"
+                     Style="{StaticResource txtBxStyle}"
+                     VerticalContentAlignment="Center"
+                     Margin="10, 0, 10, 10"/>
+
+                    <Button Content="Add Friend"
+                        Style="{StaticResource bttnStyle}"
+                        Command="{Binding Path=AddFriendCommand}"/>
+
+                    <Label Content="{Binding Path=LabelMessage}"
+                        Grid.Row="2"
+                        Foreground="Red"
+                        HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+
             <Button Content="Sign out"
                 Grid.Row="3"
                 Style="{StaticResource bttnStyle}"

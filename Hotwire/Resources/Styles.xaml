@@ -110,7 +110,7 @@
                     <Border Background="{TemplateBinding Background}"
                             CornerRadius="5" Margin="5, 3, 5, 3">
                         <StackPanel>
-                            <Label Content="{Binding Username}"
+                            <Label Content="{Binding Nickname}"
                                        Foreground="White"/>
                             <Label Content="{Binding LastMessage}"
                                        Foreground="Gray"

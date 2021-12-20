@@ -16,6 +16,7 @@ namespace Hotwire.ViewModel
 
         public string AddFriendInput { get; set; }
         public string LabelMessage { get; set; }
+        public string Nickname { get; set; }
 
         public ChatViewModel(BaseViewModel viewModel)
         {
@@ -23,12 +24,13 @@ namespace Hotwire.ViewModel
             DisconnectCommand = new RelayCommand(disconnect);
             AddFriendCommand = new RelayCommand(addFriend);
             Contacts = new ObservableCollection<ContactItem>();
+            Nickname = "";
 
             App.WebSocketService.GetFriends();
 
             LabelMessage = " ";
 
-            App.WebSocketService.PropertyChanged += userlistUpdated;
+            App.WebSocketService.PropertyChanged += propertiesChanged;
         }
 
         private void disconnect()
@@ -37,7 +39,7 @@ namespace Hotwire.ViewModel
             viewModel.SelectedViewModel = new LoginViewModel(viewModel);
         }
 
-        private void userlistUpdated(object sender, PropertyChangedEventArgs e)
+        private void propertiesChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Friends")
             {
@@ -46,12 +48,16 @@ namespace Hotwire.ViewModel
                     Contacts.Clear();
 
                     foreach (var item in App.WebSocketService.Friends)
-                        Contacts.Add(new ContactItem(item.Nickname, "-"));
+                        Contacts.Add(new ContactItem(item.Nickname,item.NicknameID, "-"));
                 });
             }
             else if (e.PropertyName == "Response")
             {
                 LabelMessage = App.WebSocketService.Response;
+            }
+            else if (e.PropertyName == "CurrentUser")
+            {
+                Nickname = $"{App.WebSocketService.CurrentUser.Nickname}#{App.WebSocketService.CurrentUser.NicknameID}";
             }
         }
 
