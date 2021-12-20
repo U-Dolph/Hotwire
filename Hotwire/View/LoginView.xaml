@@ -43,7 +43,8 @@
                  adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
                  Grid.Row="1"
                  Style="{StaticResource txtBxStyle}"
-                 VerticalContentAlignment="Center"/>
+                 VerticalContentAlignment="Center"
+                 Text="{Binding Path=Username}"/>
 
         <PasswordBox adorners:Watermark.Text="Password"
                  adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
@@ -56,7 +57,8 @@
                  VerticalContentAlignment="Center"
                  Template="{StaticResource passwordbox}"
                  Foreground="#FFFFFF"
-                 CaretBrush="#FFFFFF"/>
+                 CaretBrush="#FFFFFF"
+                 PasswordChanged="PasswordBox_PasswordChanged"/>
 
         <Button Content="Login"
                 Grid.Row="5"
@@ -68,10 +70,11 @@
                   Grid.Row="3"
                   Foreground="#FFFFFF"
                   HorizontalAlignment="Center"
-                  Margin="0, 10, 0, 10"/>
+                  Margin="0, 10, 0, 10"
+                  IsChecked="{Binding Path=StayLoggedIn}"/>
 
         <!--LOGIN ERROR MESSAGE-->        
-        <Label Content="Unsuccessful login!"
+        <Label Content="{Binding Path=LabelMessage}"
                Grid.Row="4"
                FontSize="14"
                HorizontalAlignment="Center"

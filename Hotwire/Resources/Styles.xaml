@@ -136,8 +136,7 @@
 
                             <Label Content="Message"
                                    Foreground="White"
-                                   Margin="0, -10, 0, 0"
-                                   font/>
+                                   Margin="0, -10, 0, 0"/>
                         </StackPanel>
                     </StackPanel>
                 </ControlTemplate>

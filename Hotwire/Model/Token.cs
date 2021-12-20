@@ -8,6 +8,6 @@ namespace Hotwire.Model
 {
     public class Token
     {
-
+        public string Body { get; set; }
     }
 }

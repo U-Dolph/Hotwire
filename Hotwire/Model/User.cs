@@ -22,11 +22,11 @@ namespace Hotwire.Model
         }
 
         //For logging in
-        public User(string username, string password, bool stay_logged_in)
+        public User(string username, string password, bool stayLoggedIn)
         {
             Username = username;
             Password = password;
-            StayLoggedIn = stay_logged_in;
+            StayLoggedIn = stayLoggedIn;
         }
     }
 }

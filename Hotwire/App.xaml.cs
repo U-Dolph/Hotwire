@@ -15,6 +15,7 @@ namespace Hotwire
     public partial class App : Application
     {
         static HttpService httpService;
+        static WebSocketService webSocketService;
 
         public App()
         {
@@ -26,10 +27,18 @@ namespace Hotwire
             get
             {
                 if (httpService == null)
-                {
                     httpService = new HttpService();
-                }
                 return httpService;
+            }
+        }
+
+        public static WebSocketService WebSocketService
+        {
+            get
+            {
+                if (webSocketService == null)
+                    webSocketService = new WebSocketService();
+                return webSocketService;
             }
         }
     }
