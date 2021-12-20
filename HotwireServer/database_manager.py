@@ -65,12 +65,12 @@ class DatabaseManager:
                 self.mysql.connection.commit()
 
                 _cursor.close()
-                return "User registered"
+                return "Registration successful, now you can log in"
             except MySQLdb.Error as e:
                 print(e)
-                return "ERROR"
+                return "Some error occured on our server :("
 
-        return "User already exists"
+        return "Username already taken!"
 
     def check_credentials(self, username, password):
         if self.user_exists(username):

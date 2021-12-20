@@ -5,10 +5,10 @@ import hashlib
 class User:
     def __init__(self, data):
         self.id = data['id'] if 'id' in data.keys() else None
-        self.username = data['username']
-        self.nickname = data['nickname']
+        self.username = data['Username']
+        self.nickname = data['Nickname']
         self.nickname_id = 0
-        self.password = data['password']
+        self.password = data['Password']
         self.status = 0
         self.time_registered = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
