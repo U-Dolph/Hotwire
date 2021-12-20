@@ -20,6 +20,7 @@ namespace Hotwire.Services
 
         public WebSocketService()
         {
+            client.Options.Reconnection = false;
             client.OnConnected += async (sender, e) =>
             {
                 await client.EmitAsync("authorize_ticket", socketTicket);
