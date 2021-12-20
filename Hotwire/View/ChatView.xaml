@@ -32,17 +32,10 @@
             <ListView Background="#222222"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
-                      Margin="10, 0, 10, 0"
-                      BorderBrush="#555555"
-                ItemContainerStyle="{StaticResource ContactCardStyle}">
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
+                  Margin="10, 0, 10, 0"
+                  BorderBrush="#555555"
+                  ItemContainerStyle="{StaticResource ContactCardStyle}"
+                  ItemsSource="{Binding Contacts}">
             </ListView>
 
             <!--ADD FRIEND-->

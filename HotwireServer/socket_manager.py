@@ -53,7 +53,7 @@ def query_users(nickname):
 
 
 @app_socket.on('add_friend_request')
-def add_friend(friend_id):
+def add_friend(friend_nickname, friend_):
     sender_id = sessions[str(request.sid)]
 
     result = DB_Manager.add_friend(sender_id, friend_id)

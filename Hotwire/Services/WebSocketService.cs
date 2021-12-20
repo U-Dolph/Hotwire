@@ -1,9 +1,11 @@
 ﻿using Hotwire.Model;
 using Hotwire.View;
 using Hotwire.ViewModel;
+using Newtonsoft.Json;
 using SocketIOClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,6 +19,7 @@ namespace Hotwire.Services
         //public bool Connected { get; private set; }
         private SocketIO client = new SocketIO(Constants.ServerUrl);
         private string socketTicket;
+        public List<User> Friends = new List<User>();
 
         public WebSocketService()
         {
@@ -30,6 +33,11 @@ namespace Hotwire.Services
             {
                 //Connected = true;
             });
+
+            client.On("friendlist_result", response =>
+            {
+                Friends = JsonConvert.DeserializeObject<List<User>>(response.GetValue<string>());
+            });
         }
 
         public async void ConnectToServer(string ticket)
@@ -42,6 +50,11 @@ namespace Hotwire.Services
         public async void DisconnectFromServer()
         {
             await client.DisconnectAsync();
+        }
+
+        public async void GetFriends()
+        {
+            await client.EmitAsync("get_friends_request");
         }
     }
 }

@@ -122,9 +122,9 @@ class DatabaseManager:
         for row in result:
             users.append(
                 User({
-                        "id": row[0], "username": row[1], "nickname": row[2],
-                        "nickname_id": row[3], "password": row[4], "status": row[5],
-                        "time_registered": row[6]
+                        "ID": row[0], "Username": row[1], "Nickname": row[2],
+                        "NicknameID": row[3], "Password": row[4], "Status": row[5],
+                        "TimeRegistered": row[6]
                     })
             )
 
@@ -172,9 +172,8 @@ class DatabaseManager:
         for row in result:
             users.append(
                 User({
-                    "id": row[0], "username": row[1], "nickname": row[2],
-                    "nickname_id": row[3], "password": row[4], "status": row[5],
-                    "time_registered": row[6]
+                    "ID": row[0], "Username": row[1], "Nickname": row[2],
+                    "NicknameID": row[3], "Status": row[5]
                 })
             )
 
