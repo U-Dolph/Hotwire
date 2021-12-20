@@ -42,5 +42,10 @@ namespace Hotwire.Model
             this.NicknameID = NicknameID;
             this.Status = Status;
         }
+
+        public override string ToString()
+        {
+            return Nickname + "@" + NicknameID;
+        }
     }
 }

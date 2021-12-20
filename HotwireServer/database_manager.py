@@ -91,9 +91,9 @@ class DatabaseManager:
         result = result[0]
 
         return User({
-            "id": result[0], "username": result[1], "nickname": result[2],
-            "nickname_id": result[3], "password": result[4], "status": result[5],
-            "time_registered": result[6]
+            "ID": result[0], "Username": result[1], "Nickname": result[2],
+            "NicknameID": result[3], "Password": result[4], "Status": result[5],
+            "TimeRegistered": result[6]
         })
 
     def get_user_by_username(self, username):
@@ -110,51 +110,53 @@ class DatabaseManager:
             "TimeRegistered": result[6]
         })
 
-    def get_users_by_nickname(self, nickname):
-        look_for = "%" + nickname + "%"
+    def get_user_by_nickname(self, nickname, nickname_id):
         _cursor = self.mysql.connection.cursor()
-        _cursor.execute("SELECT * FROM users WHERE NICKNAME LIKE %s", (look_for,))
+        _cursor.execute("SELECT * FROM users WHERE NICKNAME = %s AND NICKNAME_ID = %s", (nickname, nickname_id))
         result = _cursor.fetchall()
         _cursor.close()
 
-        users = []
+        print(result, len(result))
 
-        for row in result:
-            users.append(
-                User({
-                        "ID": row[0], "Username": row[1], "Nickname": row[2],
-                        "NicknameID": row[3], "Password": row[4], "Status": row[5],
-                        "TimeRegistered": row[6]
-                    })
-            )
+        if len(result) > 0:
+            result = result[0]
 
-        return users
+            return User({
+                         "ID": result[0], "Username": result[1], "Nickname": result[2],
+                         "NicknameID": result[3], "Status": result[5]
+                     })
 
-    def add_friend(self, sender_id, receiver_id):
+        return None
+
+    def add_friend(self, sender_id, receiver_nickname, receiver_nickname_id):
         sender = self.get_user_by_id(sender_id)
-        receiver = self.get_user_by_id(receiver_id)
+        receiver = self.get_user_by_nickname(receiver_nickname, receiver_nickname_id)
 
-        if self.user_exists(sender.username) and self.user_exists(receiver.username):
-            _cursor = self.mysql.connection.cursor()
+        if receiver is not None:
+            if self.user_exists(sender.username) and self.user_exists(receiver.username) and receiver.id is not sender.id:
+                _cursor = self.mysql.connection.cursor()
 
-            try:
-                _cursor.execute("INSERT INTO friendships(UserID1, UserID2, Pending, Time_Since) "
-                                "VALUES (%s, %s, %s, %s)",
-                                (int(sender.id), int(receiver.id), 0,
-                                 datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), ))
+                try:
+                    _cursor.execute("INSERT INTO friendships(UserID1, UserID2, Pending, Time_Since) "
+                                    "VALUES (%s, %s, %s, %s)",
+                                    (int(sender.id), int(receiver.id), 0,
+                                     datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),))
 
-                self.mysql.connection.commit()
-            except Exception as ex:
-                print(ex)
-                return False
+                    self.mysql.connection.commit()
+                except Exception as ex:
+                    print(ex)
+                    return "User not found"
 
-            _cursor.close()
+                _cursor.close()
 
-            return True
-        else:
-            return False
+                return "You are now friends"
+            else:
+                return "User not found"
+
+        return "User not found"
 
     def get_friends_by_id(self, user_id):
+        print("requesting users")
         _cursor = self.mysql.connection.cursor()
 
         query = "SELECT * FROM users u " \

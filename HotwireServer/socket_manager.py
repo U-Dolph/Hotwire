@@ -53,12 +53,12 @@ def query_users(nickname):
 
 
 @app_socket.on('add_friend_request')
-def add_friend(friend_nickname, friend_):
+def add_friend(friend_nickname, friend_nickname_id):
     sender_id = sessions[str(request.sid)]
 
-    result = DB_Manager.add_friend(sender_id, friend_id)
+    result = DB_Manager.add_friend(sender_id, friend_nickname, friend_nickname_id)
 
-    app_socket.emit('add_friend_completed', json.dumps(result), to=request.sid)
+    app_socket.emit('add_friend_completed', result, to=request.sid)
 
 
 @app_socket.on('get_friends_request')

@@ -1,28 +1,27 @@
 ﻿using Hotwire.Model;
-using Hotwire.View;
-using Hotwire.ViewModel;
 using Newtonsoft.Json;
 using SocketIOClient;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Hotwire.Services
 {
-    public class WebSocketService
+    public class WebSocketService : INotifyPropertyChanged
     {
-        //public bool Connected { get; private set; }
-        private SocketIO client = new SocketIO(Constants.ServerUrl);
+        private SocketIO client;
+        public bool Connected { get; set; }
         private string socketTicket;
-        public List<User> Friends = new List<User>();
+        public List<User> Friends { get; set; }
+        public string Response { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public WebSocketService()
         {
+            client = new SocketIO(Constants.ServerUrl);
+            Friends = new List<User>();
+
             client.Options.Reconnection = false;
             client.OnConnected += async (sender, e) =>
             {
@@ -31,12 +30,18 @@ namespace Hotwire.Services
 
             client.On("ticket_accepted", response => 
             {
-                //Connected = true;
+                Connected = true;
             });
 
             client.On("friendlist_result", response =>
             {
                 Friends = JsonConvert.DeserializeObject<List<User>>(response.GetValue<string>());
+            });
+
+            client.On("add_friend_completed", async response =>
+            {
+                await client.EmitAsync("get_friends_request");
+                Response = response.GetValue<string>();
             });
         }
 
@@ -50,11 +55,17 @@ namespace Hotwire.Services
         public async void DisconnectFromServer()
         {
             await client.DisconnectAsync();
+            Connected = false;
         }
 
         public async void GetFriends()
         {
             await client.EmitAsync("get_friends_request");
+        }
+
+        public async void AddFriend(string nickname, string nicknameID)
+        {
+            await client.EmitAsync("add_friend_request", new object[] {nickname, nicknameID});
         }
     }
 }

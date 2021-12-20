@@ -31,11 +31,19 @@ namespace Hotwire.ViewModel
             SwitchToRegisterPageCommand = new RelayCommand(switchToRegisterPage);
             LoginCommand = new RelayCommand(login);
             LoginButtonEnabled = true;
+
+            App.WebSocketService.PropertyChanged += switchToChatPage;
         }
 
         private void switchToRegisterPage()
         {
             viewModel.SelectedViewModel = new RegisterViewModel(viewModel); 
+        }
+
+        private void switchToChatPage(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Connected" && App.WebSocketService.Connected)
+                viewModel.SelectedViewModel = new ChatViewModel(viewModel);
         }
 
         private async void login()
@@ -50,9 +58,6 @@ namespace Hotwire.ViewModel
 
             else
                 LabelMessage = await App.HttpService.LoginUser(new User(Username, Password, StayLoggedIn));
-
-            if (LabelMessage == "Login successful")
-                viewModel.SelectedViewModel = new ChatViewModel(viewModel);
 
             LoginButtonEnabled = true;
         }

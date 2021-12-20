@@ -23,14 +23,16 @@
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <TextBox adorners:Watermark.Text="Username#ID"                     
                      adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                     Text="{Binding Path=AddFriendInput}"
                      Style="{StaticResource txtBxStyle}"
                      VerticalContentAlignment="Center"
                      Margin="10, 0, 10, 10"/>
 
             <Button Content="Add Friend"
-                Style="{StaticResource bttnStyle}"/>
+                    Style="{StaticResource bttnStyle}"
+                    Command="{Binding Path=AddFriendCommand}"/>
 
-            <Label Content="Friend not found!"
+            <Label Content="{Binding Path=LabelMessage}"
                 Grid.Row="2"
                 Foreground="Red"
                 HorizontalAlignment="Center"/>

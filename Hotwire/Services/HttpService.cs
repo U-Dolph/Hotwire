@@ -51,8 +51,6 @@ namespace Hotwire.Services
 
                         requestSocket(token);
 
-                        await Task.Delay(3000);
-
                         return "Login successful";
                     }
                     catch (Exception)
