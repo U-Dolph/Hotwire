@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:adorners="http://gu.se/Adorners"
-             xmlns:local="clr-namespace:Hotwire.View"
+             xmlns:local="clr-namespace:Hotwire.View" xmlns:viewmodel="clr-namespace:Hotwire.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterViewModel}"
              mc:Ignorable="d"
              Background="#121212">
     <Grid VerticalAlignment="Center">
@@ -38,41 +38,45 @@
         <StackPanel Grid.Row="1">
             <TextBox adorners:Watermark.Text="Username"
                      adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                     Text="{Binding Path=Username}"
                      Style="{StaticResource txtBxStyle}"
                      VerticalContentAlignment="Center"/>
 
             <TextBox adorners:Watermark.Text="Nickname"
                      adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                     Text="{Binding Path=Nickname}"
                      Margin="0, 10, 0, 10"
                      Style="{StaticResource txtBxStyle}"
                      VerticalContentAlignment="Center"/>
 
             <PasswordBox adorners:Watermark.Text="Password"
-                 adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
-                 Margin="0, 0, 0, 10"
-                 VerticalAlignment="Center"
-                 Width="200" 
-                 Height="50"
-                 FontSize="18"
-                 VerticalContentAlignment="Center"
-                 Template="{StaticResource passwordbox}"
-                 Foreground="#FFFFFF"
-                 CaretBrush="#FFFFFF"/>
+                         adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                         PasswordChanged="FirstPasswordBox_PasswordChanged"
+                         Margin="0, 0, 0, 10"
+                         VerticalAlignment="Center"
+                         Width="200" 
+                         Height="50"
+                         FontSize="18"
+                         VerticalContentAlignment="Center"
+                         Template="{StaticResource passwordbox}"
+                         Foreground="#FFFFFF"
+                         CaretBrush="#FFFFFF"/>
 
             <PasswordBox adorners:Watermark.Text="Retype Password"
-                 adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
-                 VerticalAlignment="Center"
-                 Width="200"
-                 Height="50"
-                 FontSize="18"
-                 Margin="0, 0, 0, 10"
-                 VerticalContentAlignment="Center"
-                 Template="{StaticResource passwordbox}"
-                 Foreground="#FFFFFF"
-                 CaretBrush="#FFFFFF"/>
+                         adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                         PasswordChanged="SecondPasswordBox_PasswordChanged"
+                         VerticalAlignment="Center"
+                         Width="200"
+                         Height="50"
+                         FontSize="18"
+                         Margin="0, 0, 0, 10"
+                         VerticalContentAlignment="Center"
+                         Template="{StaticResource passwordbox}"
+                         Foreground="#FFFFFF"
+                         CaretBrush="#FFFFFF"/>
         </StackPanel>
-        
-        <Label Content="Unsuccessful registration!"
+
+        <Label Content="{Binding Path=LabelMessage, UpdateSourceTrigger=PropertyChanged}"
                Grid.Row="2"
                FontSize="14"
                HorizontalAlignment="Center"
@@ -80,9 +84,11 @@
                Visibility="Visible"/>
 
         <Button Content="Register"
+                IsEnabled="{Binding Path=RegisterButtonEnabled}"
                 Grid.Row="3"
                 Margin="10, 10, 10, 10"
-                Style="{StaticResource bttnStyle}"/>
+                Style="{StaticResource bttnStyle}"
+                Command="{Binding Path=RegisterCommand}"/>
         
         <Label Grid.Row="4"
                HorizontalAlignment="Center"

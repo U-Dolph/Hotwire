@@ -24,5 +24,21 @@ namespace Hotwire.View
         {
             InitializeComponent();
         }
+
+        private void FirstPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null)
+            { 
+                ((dynamic)DataContext).Password = ((PasswordBox)sender).Password;
+            }
+        }
+
+        private void SecondPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                ((dynamic)DataContext).RePassword = ((PasswordBox)sender).Password;
+            }
+        }
     }
 }
