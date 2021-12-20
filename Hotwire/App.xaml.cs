@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotwire.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,23 @@ namespace Hotwire
     /// </summary>
     public partial class App : Application
     {
+        static HttpService httpService;
+
+        public App()
+        {
+            InitializeComponent();
+        }
+
+        public static HttpService HttpService
+        {
+            get
+            {
+                if (httpService == null)
+                {
+                    httpService = new HttpService();
+                }
+                return httpService;
+            }
+        }
     }
 }
