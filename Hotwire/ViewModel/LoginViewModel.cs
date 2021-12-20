@@ -38,10 +38,6 @@ namespace Hotwire.ViewModel
             viewModel.SelectedViewModel = new RegisterViewModel(viewModel); 
         }
 
-        private void switchToChatPage()
-        {
-            viewModel.SelectedViewModel = new ChatViewModel(viewModel);
-        }
         private async void login()
         {
             LoginButtonEnabled = false;
@@ -56,7 +52,7 @@ namespace Hotwire.ViewModel
                 LabelMessage = await App.HttpService.LoginUser(new User(Username, Password, StayLoggedIn));
 
             if (LabelMessage == "Login successful")
-                switchToChatPage();
+                viewModel.SelectedViewModel = new ChatViewModel(viewModel);
 
             LoginButtonEnabled = true;
         }

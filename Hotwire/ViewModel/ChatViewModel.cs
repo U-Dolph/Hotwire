@@ -9,12 +9,19 @@ namespace Hotwire.ViewModel
 {
     public class ChatViewModel : BaseViewModel
     {
-        public RelayCommand SwitchToAddFriendPageCommand { get; }
+        public RelayCommand DisconnectCommand { get; }
         private readonly BaseViewModel viewModel;
 
         public ChatViewModel(BaseViewModel viewModel)
         {
             this.viewModel = viewModel;
+            DisconnectCommand = new RelayCommand(disconnect);
+        }
+
+        private void disconnect()
+        {
+            App.WebSocketService.DisconnectFromServer();
+            viewModel.SelectedViewModel = new LoginViewModel(viewModel);
         }
     }
 }

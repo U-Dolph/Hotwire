@@ -14,7 +14,7 @@ namespace Hotwire.Services
 {
     public class WebSocketService
     {
-        public bool Connected { get; private set; }
+        //public bool Connected { get; private set; }
         private SocketIO client = new SocketIO(Constants.ServerUrl);
         private string socketTicket;
 
@@ -27,7 +27,7 @@ namespace Hotwire.Services
 
             client.On("ticket_accepted", response => 
             {
-                Connected = true;
+                //Connected = true;
             });
         }
 
@@ -36,6 +36,11 @@ namespace Hotwire.Services
             socketTicket = ticket;
 
             await client.ConnectAsync();
+        }
+
+        public async void DisconnectFromServer()
+        {
+            await client.DisconnectAsync();
         }
     }
 }

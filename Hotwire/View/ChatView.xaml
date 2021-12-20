@@ -52,7 +52,8 @@
                 Grid.Row="3"
                 Style="{StaticResource bttnStyle}"
                 Margin="10, 10, 0, 10"
-                HorizontalAlignment="Left"/>
+                HorizontalAlignment="Left"
+                    Command="{Binding Path=DisconnectCommand}"/>
         </Grid>
 
         <Grid Grid.Column="1">
