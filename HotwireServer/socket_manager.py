@@ -55,6 +55,11 @@ def query_users(nickname):
 @app_socket.on('add_friend_request')
 def add_friend(friend_nickname, friend_nickname_id):
     sender_id = sessions[str(request.sid)]
+    receiver = DB_Manager.get_user_by_nickname(friend_nickname, friend_nickname_id)
+
+    if receiver is not None and receiver.id in sessions.values():
+        receiver_session = list(sessions.keys())[list(sessions.values()).index(receiver.id)]
+        app_socket.emit('new_friend', sender_id, to=receiver_session)
 
     result = DB_Manager.add_friend(sender_id, friend_nickname, friend_nickname_id)
 
@@ -87,7 +92,6 @@ def get_messages_with_user(friend_id):
     print("requesting messages!")
     sender_id = sessions[str(request.sid)]
     results = DB_Manager.get_messages_with_given_user(sender_id, friend_id)
-    print(results)
     app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
 
 

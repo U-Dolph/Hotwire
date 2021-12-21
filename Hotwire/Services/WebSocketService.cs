@@ -20,15 +20,25 @@ namespace Hotwire.Services
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public bool AlreadyRequested { get; set; }
+        public bool MessagesRequested { get; set; }
+
         public WebSocketService()
         {
             client = new SocketIO(Constants.ServerUrl);
             Friends = new List<User>();
+            AlreadyRequested = false;
+            MessagesRequested = false;
 
             client.Options.Reconnection = false;
             client.OnConnected += async (sender, e) =>
             {
                 await client.EmitAsync("authorize_ticket", socketTicket);
+            };
+            
+            client.OnDisconnected += (sender, e) => {
+                AlreadyRequested = false;
+                MessagesRequested = false;
             };
 
             client.On("ticket_accepted", async response => 
@@ -55,12 +65,18 @@ namespace Hotwire.Services
 
             client.On("message_with_user_result", response =>
             {
-                CurrentMessages = JsonConvert.DeserializeObject<List<Message>>(response.GetValue<string>());
+                var x = JsonConvert.DeserializeObject<List<Message>>(response.GetValue<string>());
+                CurrentMessages = x;
             });
 
             client.On("new_message", async response =>
             {
                 await client.EmitAsync("get_messages_with_given_user_request", response.GetValue<int>());
+            });
+
+            client.On("new_friend", async response =>
+            {
+                await client.EmitAsync("get_friends_request");
             });
         }
 

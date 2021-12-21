@@ -47,7 +47,7 @@ namespace Hotwire.ViewModel
 
         private void selfPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedFriendIndex" && SelectedFriendIndex >= 0)
+            if (e.PropertyName == "SelectedFriendIndex" && SelectedFriendIndex >= 0 && Contacts.Count > 0)
             {
                 App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
             }
@@ -64,47 +64,53 @@ namespace Hotwire.ViewModel
 
         private void propertiesChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Friends")
+            if (App.WebSocketService.Connected)
             {
-                App.Current.Dispatcher.Invoke(delegate
+                if (e.PropertyName == "Friends")
                 {
-                    Contacts.Clear();
+                    App.Current.Dispatcher.Invoke(delegate
+                    {
+                        Contacts.Clear();
 
-                    foreach (var item in App.WebSocketService.Friends)
-                        Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage));
-                });
+                        foreach (var item in App.WebSocketService.Friends)
+                            Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage));
 
-                if (SelectedFriendIndex >= 0)
-                {
-                    App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
-                }
-            }
-            else if (e.PropertyName == "Response")
-            {
-                LabelMessage = App.WebSocketService.Response;
-            }
-            else if (e.PropertyName == "CurrentUser")
-            {
-                Nickname = $"{App.WebSocketService.CurrentUser.Nickname}#{App.WebSocketService.CurrentUser.NicknameID}";
-            }
-            else if (e.PropertyName == "CurrentMessages")
-            {
-                App.Current.Dispatcher.Invoke(delegate
-                {
-                    Messages.Clear();
-
-                    foreach (var item in App.WebSocketService.CurrentMessages)
-                        Messages.Add(new Message
+                        if (SelectedFriendIndex >= 0 && !App.WebSocketService.MessagesRequested)
                         {
-                            ID = item.ID,
-                            SenderID = item.SenderID,
-                            ReciverID = item.ReciverID,
-                            Content = item.Content,
-                            Nickname = item.Nickname
-                        });
-                });
+                            App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
+                            App.WebSocketService.MessagesRequested = true;
+                        }
+                    });
 
-                Console.WriteLine();
+
+                }
+                else if (e.PropertyName == "Response")
+                {
+                    LabelMessage = App.WebSocketService.Response;
+                }
+                else if (e.PropertyName == "CurrentUser")
+                {
+                    Nickname = $"{App.WebSocketService.CurrentUser.Nickname}#{App.WebSocketService.CurrentUser.NicknameID}";
+                }
+                else if (e.PropertyName == "CurrentMessages")
+                {
+                    App.Current.Dispatcher.Invoke(delegate
+                    {
+                        Messages.Clear();
+
+                        foreach (var item in App.WebSocketService.CurrentMessages)
+                            Messages.Add(new Message
+                            {
+                                ID = item.ID,
+                                SenderID = item.SenderID,
+                                ReciverID = item.ReciverID,
+                                Content = item.Content,
+                                Nickname = item.Nickname
+                            });
+                    });
+
+                    Console.WriteLine();
+                }
             }
         }
 
@@ -129,6 +135,8 @@ namespace Hotwire.ViewModel
             {
                 int receiverID = Contacts[SelectedFriendIndex].ID;
                 App.WebSocketService.SendMessage(receiverID, MessageContent);
+
+                Contacts[SelectedFriendIndex].LastMessage = MessageContent;
 
                 MessageContent = "";
             }

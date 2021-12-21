@@ -49,8 +49,11 @@ namespace Hotwire.ViewModel
 
         private void switchToChatPage(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Connected" && App.WebSocketService.Connected)
+            if (e.PropertyName == "Connected" && App.WebSocketService.Connected && !App.WebSocketService.AlreadyRequested)
+            {
                 viewModel.SelectedViewModel = new ChatViewModel(viewModel);
+                App.WebSocketService.AlreadyRequested = true;
+            }
         }
 
         private async void login()

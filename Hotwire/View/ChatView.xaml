@@ -35,7 +35,7 @@
                   Margin="10, 0, 10, 0"
                   ItemContainerStyle="{StaticResource ContactCardStyle}"
                   ItemsSource="{Binding Contacts}"
-                  SelectedIndex="{Binding Path=SelectedFriendIndex}"
+                  SelectedIndex="{Binding Path=SelectedFriendIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource listViewStyle}">
             </ListView>
 

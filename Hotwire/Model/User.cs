@@ -45,10 +45,5 @@ namespace Hotwire.Model
 
             this.LastMessage = LastMessage;
         }
-
-        public override string ToString()
-        {
-            return Nickname + "@" + NicknameID;
-        }
     }
 }
