@@ -58,7 +58,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="#505050" BorderThickness="1" Padding="2">
+                            <Border CornerRadius="5" Background="#292b2f" BorderThickness="1" Padding="2">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -74,8 +74,8 @@
         <Setter Property="Height" Value="50"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#E4F0FB"/>
-        <Setter Property="Background" Value="#424242"/>
-        <Setter Property="BorderBrush" Value="#424242"/>
+        <Setter Property="Background" Value="#292b2f"/>
+        <Setter Property="BorderBrush" Value="#292b2f"/>
         <Setter Property="Padding" Value="5, 0, 5, 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Style.Resources>
@@ -89,9 +89,10 @@
     <Style x:Key="msgBxStyle" TargetType="TextBox">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#E4F0FB"/>
-        <Setter Property="Background" Value="#424242"/>
-        <Setter Property="BorderBrush" Value="#424242"/>
+        <Setter Property="Background" Value="#292b2f"/>
+        <Setter Property="BorderBrush" Value="#292b2f"/>
         <Setter Property="Padding" Value="5, 0, 5, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="5"/>
@@ -108,7 +109,7 @@
 
     <!--PASSWORDBOX-->
     <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
-        <Border CornerRadius="5" Background="#424242" BorderThickness="1" Padding="5, 0, 5, 0">
+        <Border CornerRadius="5" Background="#292b2f" BorderThickness="1" Padding="5, 0, 5, 0">
             <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
         </Border>
     </ControlTemplate>
@@ -117,7 +118,7 @@
     <Style TargetType="ListViewItem" x:Key="ContactCardStyle">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#555555"/>
+                <Setter Property="Background" Value="#292b2f"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#888888"/>
@@ -134,7 +135,7 @@
                         <StackPanel>
                             <Label Content="{Binding Nickname}"
                                        Foreground="White"/>
-                            <Label Content="{Binding Message}"
+                            <Label Content="{Binding LastMessage}"
                                        Foreground="Gray"
                                        FontSize="10"
                                        Margin="0, -5, 0, 0"/>
@@ -171,5 +172,26 @@
     <Style x:Key="hyperlinkStyle" TargetType="Label">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
+    <!--CHECKBOX-->
+    <Style x:Key="checkBoxStyle" TargetType="CheckBox">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#E4F0FB"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    
+    <!--INFO TITLES-->
+    <Style x:Key="secondaryTitleStyle" TargetType="Label">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#E4F0FB"/>
+    </Style>
+    
+    <!--LISTVIEW-->
+    <Style x:Key="listViewStyle" TargetType="ListView">
+        <Setter Property="Background" Value="#393B40"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="BorderBrush" Value="#393B40"/>
     </Style>
 </ResourceDictionary>

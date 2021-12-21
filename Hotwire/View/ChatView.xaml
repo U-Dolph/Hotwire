@@ -27,18 +27,16 @@
                Content="{Binding Path=Nickname}"
                ContentStringFormat=" {0}'s contacts"
                Grid.Row="0"
-               FontWeight="Bold"
-               Foreground="#E4F0FB"
-               Margin="5, 0, 10, 0"/>
+               Margin="5, 0, 10, 0"
+                Style="{StaticResource secondaryTitleStyle}"/>
 
-            <ListView Background="#222222"
-                  VerticalAlignment="Stretch"
+            <ListView
                   Grid.Row="1"
                   Margin="10, 0, 10, 0"
-                  BorderBrush="#555555"
                   ItemContainerStyle="{StaticResource ContactCardStyle}"
                   ItemsSource="{Binding Contacts}"
-                  SelectedIndex="{Binding Path=SelectedFriendIndex}">
+                  SelectedIndex="{Binding Path=SelectedFriendIndex}"
+                Style="{StaticResource listViewStyle}">
             </ListView>
 
             <Grid Grid.Row="2">
@@ -51,16 +49,14 @@
 
                 <Label Content="Add a friend"
                    Grid.Row="0"
-                   FontWeight="Bold"
-                   Foreground="#E4F0FB"
-                   Margin="5, 0, 10, 0"/>
+                   Margin="5, 0, 10, 0"
+                       Style="{StaticResource secondaryTitleStyle}"/>
 
                 <StackPanel Grid.Row="1" Orientation="Vertical">
                     <TextBox adorners:Watermark.Text="Username#ID"                     
                      adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
                      Text="{Binding Path=AddFriendInput}"
                      Style="{StaticResource txtBxStyle}"
-                     VerticalContentAlignment="Center"
                      Margin="10, 0, 10, 10"/>
 
                     <Button Content="Add Friend"
@@ -76,8 +72,7 @@
             <Button Content="Sign out"
                 Grid.Row="3"
                 Style="{StaticResource bttnStyle}"
-                Margin="10, 10, 0, 10"
-                HorizontalAlignment="Left"
+                Margin="10, 10, 10, 10"
                     Command="{Binding Path=DisconnectCommand}"/>
         </Grid>
 
@@ -89,10 +84,9 @@
             </Grid.RowDefinitions>
 
             <Label Content="@Username"
-               Foreground="#E4F0FB"
                Grid.Row="0"
-                   FontWeight="Bold"
-                   Margin="5, 0, 10, 0"/>
+                   Margin="5, 0, 10, 0"
+                   Style="{StaticResource secondaryTitleStyle}"/>
 
             <tools:AutoScrollingListview Background="#222222"
                   VerticalAlignment="Stretch"
@@ -114,8 +108,7 @@
                          Grid.Column="0"
                          Style="{StaticResource msgBxStyle}"
                          Height="50"
-                         Margin="10, 10, 10, 10"
-                         VerticalContentAlignment="Center"/>
+                         Margin="10, 10, 10, 10"/>
 
                 <Button Content="Send"
                         Grid.Column="1"
