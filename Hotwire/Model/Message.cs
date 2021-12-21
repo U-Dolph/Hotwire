@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Hotwire.Model
 {
@@ -13,5 +14,6 @@ namespace Hotwire.Model
         public int ReciverID { get; set; }
         public string Nickname { get; set; }
         public string Content { get; set; }
+        public HorizontalAlignment Aligment{ get; set; } 
     }
 }

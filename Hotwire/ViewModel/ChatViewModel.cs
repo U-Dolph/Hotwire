@@ -100,7 +100,8 @@ namespace Hotwire.ViewModel
                             SenderID = item.SenderID,
                             ReciverID = item.ReciverID,
                             Content = item.Content,
-                            Nickname = item.Nickname
+                            Nickname = item.Nickname,
+                            Aligment = this.Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
                         });
                 });
 
