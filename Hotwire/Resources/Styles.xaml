@@ -141,7 +141,8 @@
                             <Label Content="{Binding LastMessage}"
                                        Foreground="Gray"
                                        FontSize="10"
-                                       Margin="0, -5, 0, 0"/>
+                                       Margin="0, -5, 0, 0"
+                                   MaxWidth="185"/>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
