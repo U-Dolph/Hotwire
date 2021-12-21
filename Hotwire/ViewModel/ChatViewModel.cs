@@ -47,7 +47,7 @@ namespace Hotwire.ViewModel
 
         private void selfPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedFriendIndex")
+            if (e.PropertyName == "SelectedFriendIndex" && SelectedFriendIndex >= 0)
             {
                 App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
             }
@@ -56,6 +56,9 @@ namespace Hotwire.ViewModel
         private void disconnect()
         {
             App.WebSocketService.DisconnectFromServer();
+            Contacts.Clear();
+            Messages.Clear();
+            SelectedFriendIndex = 0;
             viewModel.SelectedViewModel = new LoginViewModel(viewModel);
         }
 
@@ -71,7 +74,10 @@ namespace Hotwire.ViewModel
                         Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage));
                 });
 
-                App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
+                if (SelectedFriendIndex >= 0)
+                {
+                    App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
+                }
             }
             else if (e.PropertyName == "Response")
             {
