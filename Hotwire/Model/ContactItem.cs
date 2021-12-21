@@ -9,12 +9,12 @@ namespace Hotwire.Model
     public class ContactItem
     {
         public string Nickname { get; set; }
-        public string LastMessage { get; set; }
+        public string Message { get; set; }
 
-        public ContactItem(string nickname,int nicknameID, string lastMessage)
+        public ContactItem(string nickname,int nicknameID, string message)
         {
             Nickname = $"{nickname}#{nicknameID}";
-            LastMessage = lastMessage;
+            Message = message;
         }
     }
 }

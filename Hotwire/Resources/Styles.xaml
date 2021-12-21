@@ -112,7 +112,7 @@
                         <StackPanel>
                             <Label Content="{Binding Nickname}"
                                        Foreground="White"/>
-                            <Label Content="{Binding LastMessage}"
+                            <Label Content="{Binding Message}"
                                        Foreground="Gray"
                                        FontSize="10"
                                        Margin="0, -5, 0, 0"/>
@@ -130,12 +130,12 @@
                 <ControlTemplate>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel>
-                            <Label Content="Username"
+                            <Label Content="{Binding Nickname}"
                                    Foreground="Wheat"
                                    FontWeight="SemiBold"
                                    FontSize="14"/>
 
-                            <Label Content="Message"
+                            <Label Content="{Binding Message}"
                                    Foreground="White"
                                    Margin="0, -10, 0, 10"/>
                         </StackPanel>
