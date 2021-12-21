@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hotwire.View"
              xmlns:adorners="http://gu.se/Adorners"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d"
              Background="#121212">
     <Grid VerticalAlignment="Center">
@@ -59,6 +60,17 @@
                  Foreground="#FFFFFF"
                  CaretBrush="#FFFFFF"
                  PasswordChanged="PasswordBox_PasswordChanged"/>
+
+        <fa:ImageAwesome Icon="CircleOutlineNotch"  Spin="True" SpinDuration="1"
+                         Grid.Row="5"
+                         Width="25">
+            <fa:ImageAwesome.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1, 1">
+                    <GradientStop Color="#6E0DD0" Offset="0.25"/>
+                    <GradientStop Color="#27E8A7" Offset="0.75"/>
+                </LinearGradientBrush>
+            </fa:ImageAwesome.Foreground>
+        </fa:ImageAwesome>
 
         <Button Content="Login"
                 IsEnabled="{Binding Path=LoginButtonEnabled}"

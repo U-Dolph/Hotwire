@@ -6,6 +6,7 @@
              xmlns:adorners="http://gu.se/Adorners"
              xmlns:local="clr-namespace:Hotwire.View" xmlns:viewmodel="clr-namespace:Hotwire.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterViewModel}"
              mc:Ignorable="d"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              Background="#121212">
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
@@ -83,6 +84,17 @@
                Foreground="Red"
                Visibility="Visible"/>
 
+        <fa:ImageAwesome Icon="CircleOutlineNotch"  Spin="True" SpinDuration="1"
+                         Grid.Row="3"
+                         Width="25">
+            <fa:ImageAwesome.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1, 1">
+                    <GradientStop Color="#6E0DD0" Offset="0.25"/>
+                    <GradientStop Color="#27E8A7" Offset="0.75"/>
+                </LinearGradientBrush>
+            </fa:ImageAwesome.Foreground>
+        </fa:ImageAwesome>
+        
         <Button Content="Register"
                 IsEnabled="{Binding Path=RegisterButtonEnabled}"
                 Grid.Row="3"
