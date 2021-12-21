@@ -98,16 +98,17 @@ namespace Hotwire.ViewModel
                     {
                         Messages.Clear();
 
-                        foreach (var item in App.WebSocketService.CurrentMessages)
-                            Messages.Add(new Message
-                            {
-                                ID = item.ID,
-                                SenderID = item.SenderID,
-                                ReciverID = item.ReciverID,
-                                Content = item.Content,
-                                Nickname = item.Nickname
-                            });
-                    });
+                    foreach (var item in App.WebSocketService.CurrentMessages)
+                        Messages.Add(new Message
+                        {
+                            ID = item.ID,
+                            SenderID = item.SenderID,
+                            ReciverID = item.ReciverID,
+                            Content = item.Content,
+                            Nickname = item.Nickname,
+                            Aligment = this.Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
+                        });
+                });
 
                     Console.WriteLine();
                 }
