@@ -13,6 +13,7 @@ namespace Hotwire.Services
         public bool Connected { get; set; }
         private string socketTicket;
         public List<User> Friends { get; set; }
+        public List<Message> CurrentMessages { get; set; }
         public string Response { get; set; }
         public User CurrentUser { get; set; }
 
@@ -50,6 +51,11 @@ namespace Hotwire.Services
             {
                 CurrentUser = JsonConvert.DeserializeObject<User>(response.GetValue<string>());
             });
+
+            client.On("message_with_user_result", response =>
+            {
+                CurrentMessages = JsonConvert.DeserializeObject<List<Message>>(response.GetValue<string>());
+            });
         }
 
         public async void ConnectToServer(string ticket)
@@ -73,6 +79,16 @@ namespace Hotwire.Services
         public async void AddFriend(string nickname, string nicknameID)
         {
             await client.EmitAsync("add_friend_request", new object[] {nickname, nicknameID});
+        }
+
+        public async void SendMessage(int userID, string content)
+        {
+            await client.EmitAsync("send_message_to_user", new object[] { userID, content });
+        }
+
+        public async void GetMessageWithUser(int userID)
+        {
+            await client.EmitAsync("get_messages_with_given_user_request", userID);
         }
     }
 }

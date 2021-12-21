@@ -116,8 +116,6 @@ class DatabaseManager:
         result = _cursor.fetchall()
         _cursor.close()
 
-        print(result, len(result))
-
         if len(result) > 0:
             result = result[0]
 
@@ -133,7 +131,10 @@ class DatabaseManager:
         receiver = self.get_user_by_nickname(receiver_nickname, receiver_nickname_id)
 
         if receiver is not None:
-            if self.user_exists(sender.username) and self.user_exists(receiver.username) and receiver.id is not sender.id:
+            if self.user_exists(sender.username) and self.user_exists(receiver.username):
+                if receiver.id == sender.id:
+                    return "You can't add yourself"
+
                 _cursor = self.mysql.connection.cursor()
 
                 try:
@@ -145,7 +146,11 @@ class DatabaseManager:
                     self.mysql.connection.commit()
                 except Exception as ex:
                     print(ex)
-                    return "User not found"
+
+                    if "Duplicate entry" in ex.args[1]:
+                        return "You are already friends"
+
+                    return "Something went wrong :("
 
                 _cursor.close()
 
@@ -172,10 +177,12 @@ class DatabaseManager:
         users = []
 
         for row in result:
+            last_message = self.get_last_message_with_given_user(user_id, row[0])
+
             users.append(
                 User({
                     "ID": row[0], "Username": row[1], "Nickname": row[2],
-                    "NicknameID": row[3], "Status": row[5]
+                    "NicknameID": row[3], "Status": row[5], "LastMessage": last_message.content
                 })
             )
 
@@ -201,7 +208,7 @@ class DatabaseManager:
 
         return messages
 
-    def get_messages_with_give_user(self, user_id, friend_id):
+    def get_messages_with_given_user(self, user_id, friend_id):
         _cursor = self.mysql.connection.cursor()
 
         query = "SELECT * FROM messages m " \
@@ -220,6 +227,26 @@ class DatabaseManager:
             messages.append(Message([row[0], row[1], row[2], row[8], row[3]]))
 
         return messages
+
+    def get_last_message_with_given_user(self, user_id, friend_id):
+        _cursor = self.mysql.connection.cursor()
+
+        query = "SELECT * FROM messages m " \
+                "LEFT JOIN users u ON m.SenderID=u.ID WHERE m.ReceiverID = %s AND m.SenderID = %s " \
+                "UNION " \
+                "SELECT * FROM messages m " \
+                "LEFT JOIN users u ON m.ReceiverID=u.ID WHERE m.SenderID = %s AND m.ReceiverID = %s " \
+                "ORDER BY UNIX_TIMESTAMP(TimeSent) DESC " \
+                "LIMIT 1"
+
+        _cursor.execute(query, (user_id, friend_id, user_id, friend_id))
+        result = _cursor.fetchall()
+
+        if len(result) > 0:
+            result = result[0]
+            return Message([result[0], result[1], result[2], result[8], result[3]])
+        else:
+            return Message([0, user_id, friend_id, "No message", "You didn't speak yet"])
 
     def send_message_to_user(self, sender_id, receiver_id, content):
         _cursor = self.mysql.connection.cursor()

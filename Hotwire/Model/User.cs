@@ -16,6 +16,7 @@ namespace Hotwire.Model
         public string Password { get; set; }
         public bool StayLoggedIn { get; set; }
         public int Status { get; set; }
+        public string LastMessage { get; set; }
 
         //For registering
         public User(string username, string nickname, string password)
@@ -34,13 +35,15 @@ namespace Hotwire.Model
         }
 
         [JsonConstructor]
-        public User(int ID, string Username, string Nickname, int NicknameID, int Status)
+        public User(int ID, string Username, string Nickname, int NicknameID, int Status, string LastMessage)
         {
             this.ID = ID;
             this.Username = Username;
             this.Nickname = Nickname;
             this.NicknameID = NicknameID;
             this.Status = Status;
+
+            this.LastMessage = LastMessage;
         }
 
         public override string ToString()

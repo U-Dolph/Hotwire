@@ -11,11 +11,14 @@ class User:
         self.status = 0
         self.time_registered = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
+        self.last_message = data['LastMessage'] if 'LastMessage' in data.keys() else ''
+
     def serialize(self):
         return {
             'ID': int(self.id),
             'Username': self.username,
             'Nickname': self.nickname,
             'NicknameID': int(self.nickname_id),
-            'Status': int(self.status)
+            'Status': int(self.status),
+            'LastMessage': self.last_message
         }

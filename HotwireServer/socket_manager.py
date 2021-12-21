@@ -84,8 +84,10 @@ def get_all_messages():
 
 @app_socket.on('get_messages_with_given_user_request')
 def get_messages_with_user(friend_id):
+    print("requesting messages!")
     sender_id = sessions[str(request.sid)]
-    results = DB_Manager.get_messages_with_give_user(sender_id, friend_id)
+    results = DB_Manager.get_messages_with_given_user(sender_id, friend_id)
+    print(results)
     app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
 
 
@@ -93,10 +95,11 @@ def get_messages_with_user(friend_id):
 def send_message(receiver_id, content):
     sender_id = sessions[str(request.sid)]
     DB_Manager.send_message_to_user(sender_id, receiver_id, content)
+    print(f"{sender_id} to: {receiver_id} => {content}")
     
     if receiver_id in sessions.values():
         receiver_session = list(sessions.keys())[list(sessions.values()).index(receiver_id)]
         app_socket.emit('new_message', to=receiver_session)
 
-    results = DB_Manager.get_messages_with_give_user(sender_id, receiver_id)
+    results = DB_Manager.get_messages_with_given_user(sender_id, receiver_id)
     app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)

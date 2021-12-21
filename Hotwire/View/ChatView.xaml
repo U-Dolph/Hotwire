@@ -37,7 +37,8 @@
                   Margin="10, 0, 10, 0"
                   BorderBrush="#555555"
                   ItemContainerStyle="{StaticResource ContactCardStyle}"
-                  ItemsSource="{Binding Contacts}">
+                  ItemsSource="{Binding Contacts}"
+                  SelectedIndex="{Binding Path=SelectedFriendIndex}">
             </ListView>
 
             <!--ADD FRIEND-->
@@ -97,19 +98,10 @@
             <!--MESSAGES-->
             <ListView Background="#222222"
                       VerticalAlignment="Stretch"
-                  Grid.Row="1"
+                      Grid.Row="1"
                       Margin="10, 0, 10, 0"
                       BorderBrush="#555555"
-                ItemContainerStyle="{StaticResource ChatMsg}">
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-                <ListViewItem/>
-
+                      ItemContainerStyle="{StaticResource ChatMsg}">
             </ListView>
 
             <Grid Grid.Row="2">
@@ -119,15 +111,17 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox adorners:Watermark.Text="Message @Username"
-                 adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
-                     Grid.Column="0"
-                     Style="{StaticResource msgBxStyle}"
-                     Height="50"
-                     Margin="10, 10, 10, 10"
-                     VerticalContentAlignment="Center"/>
+                         adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
+                         Text="{Binding Path=MessageContent}"
+                         Grid.Column="0"
+                         Style="{StaticResource msgBxStyle}"
+                         Height="50"
+                         Margin="10, 10, 10, 10"
+                         VerticalContentAlignment="Center"/>
 
                 <Button Content="Send"
                         Grid.Column="1"
+                        Command="{Binding Path=SendMessageCommand}"
                         Style="{StaticResource bttnStyle}"
                         Width="100"
                         Margin="0, 0, 10, 0"/>
