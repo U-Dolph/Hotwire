@@ -182,7 +182,8 @@ class DatabaseManager:
             users.append(
                 User({
                     "ID": row[0], "Username": row[1], "Nickname": row[2],
-                    "NicknameID": row[3], "Status": row[5], "LastMessage": last_message.content
+                    "NicknameID": row[3], "Status": row[5], "LastMessage": last_message.content,
+                    "LastMessageID": last_message.id
                 })
             )
 

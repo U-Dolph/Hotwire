@@ -18,7 +18,6 @@ namespace Hotwire.Services
         public List<User> Friends { get; set; }
         public string Response { get; set; }
         public User CurrentUser { get; set; }
-
         public bool FlipFlop { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -54,11 +53,9 @@ namespace Hotwire.Services
                 await client.EmitAsync("get_identity_request");
             });
 
-            client.On("friendlist_result", async response =>
+            client.On("friendlist_result", response =>
             {
                 Friends = JsonConvert.DeserializeObject<List<User>>(response.GetValue<string>());
-
-                await client.EmitAsync("get_all_messages_request");
             });
 
             client.On("add_friend_completed", async response =>
@@ -83,7 +80,7 @@ namespace Hotwire.Services
                 FlipFlop = !FlipFlop;
             });
 
-            client.On("new_message", async response =>
+            client.On("new_message", response =>
             {
                 Message m = JsonConvert.DeserializeObject<Message>(response.GetValue<string>());
                 if (!MessageDictionary.ContainsKey(m.Nickname))

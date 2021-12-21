@@ -16,6 +16,7 @@ namespace Hotwire.Model
 
         public int ID { get; set; }
         public string Nickname { get; set; }
+        public int MessageID { get; set; }
         public string LastMessage 
         { 
             get => _lastMessage;
@@ -26,11 +27,12 @@ namespace Hotwire.Model
             }
         }
 
-        public ContactItem(int id, string nickname,int nicknameID, string message)
+        public ContactItem(int id, string nickname,int nicknameID, string message, int messageID)
         {
             ID = id;
             Nickname = $"{nickname}#{nicknameID}";
             LastMessage = message;
+            MessageID = messageID;
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

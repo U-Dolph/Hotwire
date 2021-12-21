@@ -73,8 +73,10 @@ namespace Hotwire.ViewModel
                     {
                         Contacts.Clear();
 
-                        foreach (var item in App.WebSocketService.Friends)
-                            Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage));
+                        foreach (User item in App.WebSocketService.Friends)
+                            Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage, item.LastMessageID));
+
+                        Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
 
                         if (SelectedFriendIndex >= 0 && !App.WebSocketService.MessagesRequested)
                         {
@@ -82,8 +84,6 @@ namespace Hotwire.ViewModel
                             App.WebSocketService.MessagesRequested = true;
                         }
                     });
-
-
                 }
                 else if (e.PropertyName == "Response")
                 {
@@ -92,10 +92,6 @@ namespace Hotwire.ViewModel
                 else if (e.PropertyName == "CurrentUser")
                 {
                     Nickname = $"{App.WebSocketService.CurrentUser.Nickname}#{App.WebSocketService.CurrentUser.NicknameID}";
-                }
-                else if (e.PropertyName == "CurrentMessages")
-                {
-
                 }
                 else if (e.PropertyName == "FlipFlop")
                 {
@@ -118,7 +114,10 @@ namespace Hotwire.ViewModel
                     foreach (var item in Contacts)
                     {
                         item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].Last().Content;
+                        item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].Last().ID;
                     }
+
+                    Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
                 }
             }
         }
