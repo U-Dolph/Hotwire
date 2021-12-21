@@ -4,6 +4,7 @@ using SocketIOClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 
 namespace Hotwire.Services
 {
@@ -55,6 +56,11 @@ namespace Hotwire.Services
             client.On("message_with_user_result", response =>
             {
                 CurrentMessages = JsonConvert.DeserializeObject<List<Message>>(response.GetValue<string>());
+            });
+
+            client.On("new_message", async response =>
+            {
+                await client.EmitAsync("get_messages_with_given_user_request", response.GetValue<int>());
             });
         }
 

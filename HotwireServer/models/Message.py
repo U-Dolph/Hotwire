@@ -12,7 +12,10 @@ class Message:
             'ID': int(self.id),
             'SenderID': self.sender_id,
             'ReceiverID': self.receiver_id,
-            'SenderNickname': self.sender_nickname,
+            'Nickname': self.sender_nickname,
             # 'ReceiverNickname': self.receiver_nickname,
             'Content': self.content,
         }
+
+    def __str__(self):
+        return f"ID: {self.id}, SenderID: {self.sender_id}, ReciverID: {self.receiver_id}, Nickname: {self.sender_nickname}, Content{self.content}"

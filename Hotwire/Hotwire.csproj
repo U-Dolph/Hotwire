@@ -119,6 +119,9 @@
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Resources\AutoScrollListbox.xaml.cs">
+      <DependentUpon>AutoScrollListbox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\WebSocketService.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
@@ -150,6 +153,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\AutoScrollListbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\CustomScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

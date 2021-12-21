@@ -224,7 +224,9 @@ class DatabaseManager:
         messages = []
 
         for row in result:
-            messages.append(Message([row[0], row[1], row[2], row[8], row[3]]))
+            sender = self.get_user_by_id(row[1])
+            sender_nickname = f"{sender.nickname}#{sender.nickname_id}"
+            messages.append(Message([row[0], row[1], row[2], sender_nickname, row[3]]))
 
         return messages
 
@@ -244,7 +246,7 @@ class DatabaseManager:
 
         if len(result) > 0:
             result = result[0]
-            return Message([result[0], result[1], result[2], result[8], result[3]])
+            return Message([result[0], result[1], result[2], result[7], result[3]])
         else:
             return Message([0, user_id, friend_id, "No message", "You didn't speak yet"])
 

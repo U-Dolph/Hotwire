@@ -99,7 +99,7 @@ def send_message(receiver_id, content):
     
     if receiver_id in sessions.values():
         receiver_session = list(sessions.keys())[list(sessions.values()).index(receiver_id)]
-        app_socket.emit('new_message', to=receiver_session)
+        app_socket.emit('new_message', sender_id, to=receiver_session)
 
     results = DB_Manager.get_messages_with_given_user(sender_id, receiver_id)
     app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
