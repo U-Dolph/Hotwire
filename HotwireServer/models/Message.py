@@ -4,7 +4,6 @@ class Message:
         self.sender_id = data[1]
         self.receiver_id = data[2]
         self.sender_nickname = data[3]
-        # self.receiver_nickname = data[4]
         self.content = data[4]
 
     def serialize(self):
@@ -13,7 +12,6 @@ class Message:
             'SenderID': self.sender_id,
             'ReceiverID': self.receiver_id,
             'Nickname': self.sender_nickname,
-            # 'ReceiverNickname': self.receiver_nickname,
             'Content': self.content,
         }
 

@@ -178,7 +178,7 @@ class DatabaseManager:
 
         for row in result:
             last_message = self.get_last_message_with_given_user(user_id, row[0])
-
+            print(row[0])
             users.append(
                 User({
                     "ID": row[0], "Username": row[1], "Nickname": row[2],
@@ -191,22 +191,15 @@ class DatabaseManager:
     def get_all_messages_by_id(self, user_id):
         _cursor = self.mysql.connection.cursor()
 
-        query = "SELECT * FROM messages m " \
-                "LEFT JOIN users u ON m.SenderID=u.ID WHERE m.ReceiverID = %s " \
-                "UNION " \
-                "SELECT * FROM messages m " \
-                "LEFT JOIN users u ON m.ReceiverID=u.ID WHERE m.SenderID = %s"
+        friends = self.get_friends_by_id(user_id)
 
-        _cursor.execute(query, (user_id, user_id, ))
+        result = {}
 
-        result = _cursor.fetchall()
+        for friend in friends:
+            messages_with_friend = self.get_messages_with_given_user(user_id, friend.id)
+            result[f"{friend.nickname}#{friend.nickname_id}"] = [e.serialize() for e in messages_with_friend]
 
-        messages = []
-
-        for row in result:
-            messages.append(Message([row[0], row[1], row[2], row[3], row[8]]))
-
-        return messages
+        return result
 
     def get_messages_with_given_user(self, user_id, friend_id):
         _cursor = self.mysql.connection.cursor()
@@ -260,6 +253,10 @@ class DatabaseManager:
                              datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), ))
 
             self.mysql.connection.commit()
+
+            result = _cursor.execute("SELECT ID from messages ORDER BY ID DESC LIMIT 1")
+            last_msg_id = _cursor.fetchone()[0]
+            return last_msg_id
         except Exception as ex:
             print(ex)
 

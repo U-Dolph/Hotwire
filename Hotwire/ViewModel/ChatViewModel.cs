@@ -42,6 +42,7 @@ namespace Hotwire.ViewModel
 
             App.WebSocketService.PropertyChanged += propertiesChanged;
 
+
             PropertyChanged += selfPropertyChanged;
         }
 
@@ -94,23 +95,30 @@ namespace Hotwire.ViewModel
                 }
                 else if (e.PropertyName == "CurrentMessages")
                 {
+
+                }
+                else if (e.PropertyName == "FlipFlop")
+                {
                     App.Current.Dispatcher.Invoke(delegate
                     {
                         Messages.Clear();
 
-                    foreach (var item in App.WebSocketService.CurrentMessages)
-                        Messages.Add(new Message
-                        {
-                            ID = item.ID,
-                            SenderID = item.SenderID,
-                            ReciverID = item.ReciverID,
-                            Content = item.Content,
-                            Nickname = item.Nickname,
-                            Aligment = this.Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
-                        });
-                });
+                        foreach (var item in App.WebSocketService.MessageDictionary[Contacts[SelectedFriendIndex].Nickname])
+                            Messages.Add(new Message
+                            {
+                                ID = item.ID,
+                                SenderID = item.SenderID,
+                                ReciverID = item.ReciverID,
+                                Content = item.Content,
+                                Nickname = item.Nickname,
+                                Aligment = Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
+                            });
+                    });
 
-                    Console.WriteLine();
+                    foreach (var item in Contacts)
+                    {
+                        item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].Last().Content;
+                    }
                 }
             }
         }

@@ -6,7 +6,7 @@ from app import app
 from flask_socketio import SocketIO
 from endpoints.setup_socket import ticket_cache
 from database_manager import DB_Manager
-
+from models.Message import Message
 
 app_socket = SocketIO(app)
 
@@ -84,26 +84,42 @@ def get_identity():
 def get_all_messages():
     sender_id = sessions[str(request.sid)]
     results = DB_Manager.get_all_messages_by_id(sender_id)
-    app_socket.emit('message_list_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
+
+    print(results)
+    app_socket.emit('message_list_result', json.dumps(results), room=request.sid)
 
 
 @app_socket.on('get_messages_with_given_user_request')
 def get_messages_with_user(friend_id):
     print("requesting messages!")
     sender_id = sessions[str(request.sid)]
+    receiver_user = DB_Manager.get_user_by_id(friend_id)
     results = DB_Manager.get_messages_with_given_user(sender_id, friend_id)
-    app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
+
+    app_socket.emit('message_with_user_result', json.dumps({
+        f"{receiver_user.nickname}#{receiver_user.nickname_id}":
+            [e.serialize() for e in results]}),
+                    room=request.sid)
 
 
 @app_socket.on('send_message_to_user')
 def send_message(receiver_id, content):
     sender_id = sessions[str(request.sid)]
-    DB_Manager.send_message_to_user(sender_id, receiver_id, content)
+    sender_user = DB_Manager.get_user_by_id(sender_id)
+    receiver_user = DB_Manager.get_user_by_id(receiver_id)
+    last_message_id = DB_Manager.send_message_to_user(sender_id, receiver_id, content)
     print(f"{sender_id} to: {receiver_id} => {content}")
     
     if receiver_id in sessions.values():
         receiver_session = list(sessions.keys())[list(sessions.values()).index(receiver_id)]
-        app_socket.emit('new_message', sender_id, to=receiver_session)
+
+        msg = Message([last_message_id, sender_id, receiver_id,
+                       f"{sender_user.nickname}#{sender_user.nickname_id}", content])
+
+        app_socket.emit('new_message', json.dumps(msg.serialize()), to=receiver_session)
 
     results = DB_Manager.get_messages_with_given_user(sender_id, receiver_id)
-    app_socket.emit('message_with_user_result', str(json.dumps([e.serialize() for e in results])), room=request.sid)
+    app_socket.emit('message_with_user_result', json.dumps({
+        f"{receiver_user.nickname}#{receiver_user.nickname_id}":
+            [e.serialize() for e in results]}),
+                    room=request.sid)
