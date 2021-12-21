@@ -24,10 +24,16 @@ namespace Hotwire.ViewModel
         public string Nickname { get; set; }
         public string Password { get; set; }
         public string RePassword { get; set; }
+        public bool IsBusy { get; set; }
 
         public string LabelMessage { get; private set; }
 
         public bool RegisterButtonEnabled { get; private set; }
+
+        public Visibility ButtonVisibility
+        {
+            get { return IsBusy == true ? Visibility.Hidden : Visibility.Visible; }
+        }
 
         public RegisterViewModel(BaseViewModel viewModel)
         {
@@ -38,6 +44,7 @@ namespace Hotwire.ViewModel
 
             LabelMessage = " ";
             RegisterButtonEnabled = true;
+            IsBusy = false;
         }
 
         private void switchToLoginPage()
@@ -47,6 +54,7 @@ namespace Hotwire.ViewModel
 
         private async void registerUser()
         {
+            IsBusy = true;
             RegisterButtonEnabled = false;
             LabelMessage = " ";
 
@@ -60,6 +68,7 @@ namespace Hotwire.ViewModel
                 LabelMessage = await App.HttpService.RegisterUser(new User(Username, Nickname, Password));
 
             RegisterButtonEnabled = true;
+            IsBusy = false;
         }
     }
 }

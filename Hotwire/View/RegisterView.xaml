@@ -97,6 +97,7 @@
         
         <Button Content="Register"
                 IsEnabled="{Binding Path=RegisterButtonEnabled}"
+                Visibility="{Binding Path=ButtonVisibility}"
                 Grid.Row="3"
                 Margin="10, 10, 10, 10"
                 Style="{StaticResource bttnStyle}"

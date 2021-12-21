@@ -21,8 +21,14 @@ namespace Hotwire.ViewModel
         public string Username { get; set; }
         public string Password { get; set; }
         public bool StayLoggedIn { get; set; }
+        public bool IsBusy { get; set; }
 
         public bool LoginButtonEnabled { get; set; }
+
+        public Visibility ButtonVisibility
+        {
+            get { return IsBusy == true ? Visibility.Hidden : Visibility.Visible; }
+        }
 
         public LoginViewModel(BaseViewModel viewModel)
         {
@@ -31,6 +37,7 @@ namespace Hotwire.ViewModel
             SwitchToRegisterPageCommand = new RelayCommand(switchToRegisterPage);
             LoginCommand = new RelayCommand(login);
             LoginButtonEnabled = true;
+            IsBusy = false;
 
             App.WebSocketService.PropertyChanged += switchToChatPage;
         }
@@ -48,6 +55,7 @@ namespace Hotwire.ViewModel
 
         private async void login()
         {
+            IsBusy = true;
             LoginButtonEnabled = false;
             LabelMessage = " ";
 
@@ -60,6 +68,7 @@ namespace Hotwire.ViewModel
                 LabelMessage = await App.HttpService.LoginUser(new User(Username, Password, StayLoggedIn));
 
             LoginButtonEnabled = true;
+            IsBusy = false;
         }
     }
 }
