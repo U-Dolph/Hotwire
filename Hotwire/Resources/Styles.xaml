@@ -156,19 +156,24 @@
             <Setter.Value>
                 <ControlTemplate>
                     <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="{Binding Aligment}">
-                        <StackPanel>
-                            <Label Content="{Binding Nickname}"
-                                   HorizontalAlignment="{Binding Aligment}"
-                                   Foreground="#BB86FC"
-                                   FontWeight="SemiBold"
-                                   FontSize="16"/>
+                        <Border BorderBrush="#555555" CornerRadius="10,10,10,10">
+                            <StackPanel Margin="0,5,0,5">
+                                <TextBlock Text="{Binding Nickname}" 
+                                           Padding="5,0,5,0"
+                                           HorizontalAlignment="{Binding Aligment}"
+                                           Foreground="#888888"
+                                           FontWeight="SemiBold"
+                                           FontSize="12"/>
+                                <Border Background="#444444" CornerRadius="10,10,10,10" BorderThickness="10" BorderBrush="#444444">
+                                    <TextBlock Text="{Binding Content}"
+                                               HorizontalAlignment="{Binding Aligment}"
+                                               VerticalAlignment="Center"
+                                               Foreground="#E4F0FB"
+                                               FontSize="16"/>
 
-                            <Label Content="{Binding Content}"
-                                   HorizontalAlignment="{Binding Aligment}"
-                                   Foreground="#E4F0FB"
-                                   Margin="0, -10, 0, 10"
-                                   FontSize="14"/>
-                        </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
