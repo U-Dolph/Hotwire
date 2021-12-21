@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hotwire.View"
-      xmlns:adorners="http://gu.se/Adorners"      
+      xmlns:tools="clr-namespace:Hotwire.Resources"
+      xmlns:adorners="http://gu.se/Adorners"
       mc:Ignorable="d"
       Background="#121212">
 
@@ -87,12 +88,13 @@
                    Margin="5, 0, 10, 0"
                    Style="{StaticResource secondaryTitleStyle}"/>
 
-            <ListView
-                      Grid.Row="1"
-                      Margin="10, 0, 10, 0"
-                      ItemContainerStyle="{StaticResource ChatMsg}"
-                Style="{StaticResource listViewStyle}">
-            </ListView>
+            <tools:AutoScrollingListview Background="#222222"
+                  VerticalAlignment="Stretch"
+                  Grid.Row="1"
+                  Margin="10, 0, 10, 0"
+                  BorderBrush="#555555"
+                  ItemContainerStyle="{StaticResource ChatMsg}"
+                  ItemsSource="{Binding Messages}" />
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>

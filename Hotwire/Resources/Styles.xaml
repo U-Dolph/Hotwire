@@ -158,7 +158,7 @@
                                    FontWeight="SemiBold"
                                    FontSize="14"/>
 
-                            <Label Content="{Binding Message}"
+                            <Label Content="{Binding Content}"
                                    Foreground="White"
                                    Margin="0, -10, 0, 10"/>
                         </StackPanel>

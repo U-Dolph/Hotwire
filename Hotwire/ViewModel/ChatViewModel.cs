@@ -47,9 +47,9 @@ namespace Hotwire.ViewModel
 
         private void selfPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelctedFriendIndex")
+            if (e.PropertyName == "SelectedFriendIndex")
             {
-                App.WebSocketService.GetMessageWithUser(SelectedFriendIndex);
+                App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Hotwire.ViewModel
                             SenderID = item.SenderID,
                             ReciverID = item.ReciverID,
                             Content = item.Content,
-                            SenderNickname = item.SenderNickname
+                            Nickname = item.Nickname
                         });
                 });
 
