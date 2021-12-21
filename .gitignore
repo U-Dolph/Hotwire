@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /HotwireServer/venv
 /HotwireServer/credentials.conf
 /HotwireServer/.idea
+/HotwireServer/start.bat
