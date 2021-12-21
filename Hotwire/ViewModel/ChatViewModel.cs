@@ -66,7 +66,7 @@ namespace Hotwire.ViewModel
         {
             if (App.WebSocketService.Connected)
             {
-                if (e.PropertyName == "Friends")
+                if (e.PropertyName == "Friends" && App.WebSocketService.Friends.Count > 0)
                 {
                     App.Current.Dispatcher.Invoke(delegate
                     {
