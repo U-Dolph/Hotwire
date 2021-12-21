@@ -88,13 +88,12 @@
                    Margin="5, 0, 10, 0"
                    Style="{StaticResource secondaryTitleStyle}"/>
 
-            <tools:AutoScrollingListview Background="#222222"
-                  VerticalAlignment="Stretch"
+            <tools:AutoScrollingListview
                   Grid.Row="1"
                   Margin="10, 0, 10, 0"
-                  BorderBrush="#555555"
                   ItemContainerStyle="{StaticResource ChatMsg}"
-                  ItemsSource="{Binding Messages}" />
+                  ItemsSource="{Binding Messages}"
+                Style="{StaticResource listViewStyle}"/>
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
