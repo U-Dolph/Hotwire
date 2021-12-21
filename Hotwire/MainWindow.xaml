@@ -14,18 +14,38 @@
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanResizeWithGrip">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="25"/>
+        <WindowChrome 
+            CaptionHeight="25" 
+            CornerRadius ="0"
+            GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <view:TitleBarView Grid.Row="0"/>
 
-        <DockPanel Grid.Row="1">
-            <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
-        </DockPanel>
-    </Grid>
+    <Border BorderThickness="0">
+        <Border.Style>
+            <Style TargetType="{x:Type Border}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                 Value="Maximized">
+                        <Setter Property="Margin" Value="5"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                 Value="Normal">
+                        <Setter Property="Margin" Value="0"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <view:TitleBarView Grid.Row="0"/>
 
+            <DockPanel Grid.Row="1">
+                <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
+            </DockPanel>
+        </Grid>
+    </Border>
 </Window>
