@@ -6,6 +6,13 @@
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="Foreground" Value="#6E0DD0"/>
     </Style>
+    
+    <!--ERROR MESSAGE STYLE-->
+    <Style x:Key="ErrorMessageStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#FF0266"/>
+    </Style>
 
     <!--BUTTON STYLE-->
     <Style x:Key="bttnStyle" TargetType="Button">
@@ -60,6 +67,7 @@
         <Setter Property="Foreground" Value="#E4F0FB"/>
         <Setter Property="Background" Value="#424242"/>
         <Setter Property="BorderBrush" Value="#424242"/>
+        <Setter Property="Padding" Value="5, 0, 5, 0"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="5"/>
@@ -73,6 +81,7 @@
         <Setter Property="Foreground" Value="#E4F0FB"/>
         <Setter Property="Background" Value="#424242"/>
         <Setter Property="BorderBrush" Value="#424242"/>
+        <Setter Property="Padding" Value="5, 0, 5, 0"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="5"/>
@@ -89,7 +98,7 @@
 
     <!--PASSWORDBOX STYLE-->
     <ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
-        <Border CornerRadius="5" Background="#424242" BorderThickness="1" Padding="2">
+        <Border CornerRadius="5" Background="#424242" BorderThickness="1" Padding="5, 0, 5, 0">
             <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
         </Border>
     </ControlTemplate>
@@ -98,7 +107,10 @@
     <Style TargetType="ListViewItem" x:Key="ContactCardStyle">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#292b2f"/>
+                <Setter Property="Background" Value="#555555"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#888888"/>
             </Trigger>
         </Style.Triggers>
 
@@ -143,5 +155,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>           
+    </Style>  
+    
+    <!--CHECKBOX STYLE-->
+    <Style x:Key="checkBoxStyle" TargetType="CheckBox">
+        <Setter Property="Background" Value="#222222"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#E4F0FB"/>
+    </Style>
 </ResourceDictionary>

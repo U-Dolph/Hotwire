@@ -69,8 +69,7 @@
 
                     <Label Content="{Binding Path=LabelMessage}"
                         Grid.Row="2"
-                        Foreground="Red"
-                        HorizontalAlignment="Center"/>
+                        Style="{StaticResource ErrorMessageStyle}"/>
                 </StackPanel>
             </Grid>
 
@@ -113,14 +112,26 @@
 
             </ListView>
 
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBox adorners:Watermark.Text="Message @Username"
+                <TextBox adorners:Watermark.Text="Message @Username"
                  adorners:Watermark.TextStyle="{StaticResource AdornerTextStyle}"
-                     Grid.Row="2"
+                     Grid.Column="0"
                      Style="{StaticResource msgBxStyle}"
                      Height="50"
                      Margin="10, 10, 10, 10"
                      VerticalContentAlignment="Center"/>
+
+                <Button Content="Send"
+                        Grid.Column="1"
+                        Style="{StaticResource bttnStyle}"
+                        Width="100"
+                        Margin="0, 0, 10, 0"/>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

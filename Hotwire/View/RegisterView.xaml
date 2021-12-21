@@ -79,10 +79,7 @@
 
         <Label Content="{Binding Path=LabelMessage, UpdateSourceTrigger=PropertyChanged}"
                Grid.Row="2"
-               FontSize="14"
-               HorizontalAlignment="Center"
-               Foreground="Red"
-               Visibility="Visible"/>
+               Style="{StaticResource ErrorMessageStyle}"/>
 
         <fa:ImageAwesome Icon="CircleOutlineNotch"  Spin="True" SpinDuration="1"
                          Grid.Row="3"
