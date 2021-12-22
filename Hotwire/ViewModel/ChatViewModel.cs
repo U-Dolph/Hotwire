@@ -72,22 +72,7 @@ namespace Hotwire.ViewModel
             {
                 if (e.PropertyName == "Friends" && App.WebSocketService.Friends.Count > 0)
                 {
-                    App.Current.Dispatcher.Invoke(delegate
-                    {
-                        Contacts.Clear();
-
-                        foreach (User item in App.WebSocketService.Friends)
-                            Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage, item.LastMessageID));
-
-                        Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
-                        SelectedFriendNickname = Contacts[SelectedFriendIndex].Nickname;
-
-                        if (SelectedFriendIndex >= 0 && !App.WebSocketService.MessagesRequested)
-                        {
-                            App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
-                            App.WebSocketService.MessagesRequested = true;
-                        }
-                    });
+                    friendsChanged();
                 }
                 else if (e.PropertyName == "Response")
                 {
@@ -99,42 +84,70 @@ namespace Hotwire.ViewModel
                 }
                 else if (e.PropertyName == "FlipFlop")
                 {
-                    App.Current.Dispatcher.Invoke(delegate
-                    {
-                        Messages.Clear();
-
-                        foreach (var item in App.WebSocketService.MessageDictionary[Contacts[SelectedFriendIndex].Nickname])
-                            Messages.Add(new Message
-                            {
-                                ID = item.ID,
-                                SenderID = item.SenderID,
-                                ReciverID = item.ReciverID,
-                                Content = item.Content,
-                                Nickname = item.Nickname,
-                                Aligment = Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
-                            });
-
-                        foreach (var item in Contacts)
-                        {
-                            if (App.WebSocketService.MessageDictionary.ContainsKey(item.Nickname))
-                            {
-                                if (App.WebSocketService.MessageDictionary[item.Nickname].Count == 0)
-                                {
-                                    item.LastMessage = "You didn't speak yet";
-                                    item.MessageID = 0;
-                                }
-                                else
-                                {
-                                    item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().Content;
-                                    item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().ID;
-                                }
-                            }
-                        }
-
-                        Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
-                    });
+                    flipFlopChanged();
                 }
             }
+        }
+
+        private void friendsChanged()
+        {
+            App.Current.Dispatcher.Invoke(delegate
+            {
+                Contacts.Clear();
+
+                foreach (User item in App.WebSocketService.Friends)
+                    Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage, item.LastMessageID));
+
+                Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
+
+                SelectedFriendIndex = Contacts.IndexOf(Contacts.Where(x => x.Nickname == SelectedFriendNickname).FirstOrDefault());
+
+                if (SelectedFriendIndex > 0)
+                    SelectedFriendNickname = Contacts[SelectedFriendIndex].Nickname;
+
+                if (SelectedFriendIndex >= 0 && !App.WebSocketService.MessagesRequested)
+                {
+                    App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
+                    App.WebSocketService.MessagesRequested = true;
+                }
+            });
+        }
+        private void flipFlopChanged()
+        {
+            App.Current.Dispatcher.Invoke(delegate
+            {
+                Messages.Clear();
+
+                foreach (var item in App.WebSocketService.MessageDictionary[Contacts[SelectedFriendIndex].Nickname])
+                    Messages.Add(new Message
+                    {
+                        ID = item.ID,
+                        SenderID = item.SenderID,
+                        ReciverID = item.ReciverID,
+                        Content = item.Content,
+                        Nickname = item.Nickname,
+                        Aligment = Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
+                    });
+
+                foreach (var item in Contacts)
+                {
+                    if (App.WebSocketService.MessageDictionary.ContainsKey(item.Nickname))
+                    {
+                        if (App.WebSocketService.MessageDictionary[item.Nickname].Count == 0)
+                        {
+                            item.LastMessage = "You didn't speak yet";
+                            item.MessageID = 0;
+                        }
+                        else
+                        {
+                            item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().Content;
+                            item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().ID;
+                        }
+                    }
+                }
+
+                Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
+            });
         }
 
         private void addFriend()
