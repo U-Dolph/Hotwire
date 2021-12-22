@@ -12,7 +12,8 @@
         Width="1200" Height="640"
         WindowState="{Binding WindowState, Mode=TwoWay}"
         WindowStartupLocation="CenterScreen" 
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+    MinWidth="900" MinHeight="500">
     <WindowChrome.WindowChrome>
         <WindowChrome 
             CaptionHeight="25" 

@@ -95,7 +95,7 @@
         <Setter Property="Padding" Value="5, 0, 5, 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="MaxLength" Value="60"/>
+        <Setter Property="MaxLength" Value="500"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="5"/>
@@ -164,11 +164,13 @@
                                            FontWeight="SemiBold"
                                            FontSize="12"/>
                             <Border Background="#444444" CornerRadius="10" Padding="10">
-                                <TextBlock Text="{Binding Content}"
+                                <TextBlock
                                                HorizontalAlignment="{Binding Aligment}"
                                                VerticalAlignment="Center"
                                                Foreground="#E4F0FB"
-                                               FontSize="16"/>
+                                               FontSize="16">
+                                    <AccessText TextWrapping="Wrap" MaxWidth="400" Text="{Binding Content}"></AccessText>
+                                </TextBlock>
 
                             </Border>
                         </StackPanel>

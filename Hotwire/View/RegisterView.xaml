@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
 
 
-            <Label Content="Register a new Hotwire account"
+            <Label Content="Register"
                    Grid.Row="1"
                    Margin="0, 0, 0, 25"
                    Style="{StaticResource titleStyle}"/>
