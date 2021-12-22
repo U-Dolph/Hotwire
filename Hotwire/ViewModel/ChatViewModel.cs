@@ -109,15 +109,20 @@ namespace Hotwire.ViewModel
                                 Nickname = item.Nickname,
                                 Aligment = Nickname == item.Nickname ? HorizontalAlignment.Right : HorizontalAlignment.Left
                             });
+
+                        foreach (var item in Contacts)
+                        {
+                            if (App.WebSocketService.MessageDictionary.ContainsKey(item.Nickname))
+                            {
+                                item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].Last().Content;
+                                item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].Last().ID;
+                            }
+
+                            Console.WriteLine();
+                        }
+
+                        Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
                     });
-
-                    foreach (var item in Contacts)
-                    {
-                        item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].Last().Content;
-                        item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].Last().ID;
-                    }
-
-                    Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
                 }
             }
         }
@@ -139,7 +144,7 @@ namespace Hotwire.ViewModel
 
         private void sendMessage()
         {
-            if (MessageContent != null && MessageContent.Length > 0)
+            if (MessageContent != null && MessageContent.Length > 0 && SelectedFriendIndex >= 0)
             {
                 int receiverID = Contacts[SelectedFriendIndex].ID;
                 App.WebSocketService.SendMessage(receiverID, MessageContent);

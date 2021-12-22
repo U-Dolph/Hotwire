@@ -40,7 +40,7 @@ class DatabaseManager:
 
     def check_nickname(self, nickname):
         _cursor = self.mysql.connection.cursor()
-        _cursor.execute("SELECT NICKNAME_ID FROM users WHERE NICKNAME=%s order by NICKNAME_ID LIMIT 1", (nickname, ))
+        _cursor.execute("SELECT NICKNAME_ID FROM users WHERE NICKNAME=%s order by NICKNAME_ID DESC LIMIT 1", (nickname, ))
 
         result = _cursor.fetchone()
 
