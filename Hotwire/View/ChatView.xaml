@@ -83,7 +83,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="@Username"
+            <Label Content="{Binding SelectedFriendNickname}"
                Grid.Row="0"
                    Margin="5, 0, 10, 0"
                    Style="{StaticResource secondaryTitleStyle}"/>

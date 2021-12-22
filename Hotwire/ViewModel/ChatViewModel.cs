@@ -22,6 +22,7 @@ namespace Hotwire.ViewModel
         public string LabelMessage { get; set; }
         public string Nickname { get; set; }
         public int SelectedFriendIndex { get; set; }
+        public string SelectedFriendNickname { get; set; }
         public string MessageContent { get; set; }
 
         public ChatViewModel(BaseViewModel viewModel)
@@ -35,6 +36,7 @@ namespace Hotwire.ViewModel
             Messages = new ObservableCollection<Message>();
 
             Nickname = "";
+            
 
             App.WebSocketService.GetFriends();
 
@@ -51,6 +53,7 @@ namespace Hotwire.ViewModel
             if (e.PropertyName == "SelectedFriendIndex" && SelectedFriendIndex >= 0 && Contacts.Count > 0)
             {
                 App.WebSocketService.GetMessageWithUser(Contacts[SelectedFriendIndex].ID);
+                SelectedFriendNickname = Contacts[SelectedFriendIndex].Nickname;
             }
         }
 
@@ -77,6 +80,7 @@ namespace Hotwire.ViewModel
                             Contacts.Add(new ContactItem(item.ID, item.Nickname, item.NicknameID, item.LastMessage, item.LastMessageID));
 
                         Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
+                        SelectedFriendNickname = Contacts[SelectedFriendIndex].Nickname;
 
                         if (SelectedFriendIndex >= 0 && !App.WebSocketService.MessagesRequested)
                         {
@@ -150,7 +154,7 @@ namespace Hotwire.ViewModel
 
         private void sendMessage()
         {
-            if (MessageContent != null && MessageContent.Length > 0 && SelectedFriendIndex >= 0)
+            if (MessageContent != null && MessageContent.Length > 0 && SelectedFriendIndex >= 0 && Contacts.Count > 0)
             {
                 int receiverID = Contacts[SelectedFriendIndex].ID;
                 App.WebSocketService.SendMessage(receiverID, MessageContent);
