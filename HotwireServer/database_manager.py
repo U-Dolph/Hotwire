@@ -135,6 +135,9 @@ class DatabaseManager:
                 if receiver.id == sender.id:
                     return "You can't add yourself"
 
+                if self.is_already_friends(sender_id, receiver.id):
+                    return "You are already friends"
+
                 _cursor = self.mysql.connection.cursor()
 
                 try:
@@ -159,6 +162,25 @@ class DatabaseManager:
                 return "User not found"
 
         return "User not found"
+
+    def is_already_friends(self, sender_id, receiver_id):
+        _cursor = self.mysql.connection.cursor()
+
+        query = "SELECT * FROM users u "\
+                "LEFT JOIN friendships f ON f.UserID2=u.ID WHERE f.UserID1 = %s and f.UserID2 = %s " \
+                "UNION " \
+                "SELECT * FROM users u " \
+                "LEFT JOIN friendships f ON f.UserID1=u.ID WHERE f.UserID2 = %s and f.UserID1 = %s"
+
+        _cursor.execute(query, (sender_id, receiver_id, sender_id, receiver_id, ))
+
+        result = _cursor.fetchone()
+
+        if result:
+            return True
+        # print("eyyo:", result)
+
+        return False
 
     def get_friends_by_id(self, user_id):
         print("requesting users")
