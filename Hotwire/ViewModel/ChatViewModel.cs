@@ -114,11 +114,17 @@ namespace Hotwire.ViewModel
                         {
                             if (App.WebSocketService.MessageDictionary.ContainsKey(item.Nickname))
                             {
-                                item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().Content;
-                                item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().ID;
+                                if (App.WebSocketService.MessageDictionary[item.Nickname].Count == 0)
+                                {
+                                    item.LastMessage = "You didn't speak yet";
+                                    item.MessageID = 0;
+                                }
+                                else
+                                {
+                                    item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().Content;
+                                    item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().ID;
+                                }
                             }
-
-                            Console.WriteLine();
                         }
 
                         Contacts = new ObservableCollection<ContactItem>(Contacts.OrderByDescending(x => x.MessageID));
