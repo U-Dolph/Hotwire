@@ -114,8 +114,8 @@ namespace Hotwire.ViewModel
                         {
                             if (App.WebSocketService.MessageDictionary.ContainsKey(item.Nickname))
                             {
-                                item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].Last().Content;
-                                item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].Last().ID;
+                                item.LastMessage = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().Content;
+                                item.MessageID = App.WebSocketService.MessageDictionary[item.Nickname].LastOrDefault().ID;
                             }
 
                             Console.WriteLine();

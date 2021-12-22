@@ -51,6 +51,7 @@ namespace Hotwire.Services
             {
                 Connected = true;
                 await client.EmitAsync("get_identity_request");
+                await client.EmitAsync("get_all_messages_request");
             });
 
             client.On("friendlist_result", response =>
@@ -76,7 +77,7 @@ namespace Hotwire.Services
                 foreach (var item in x.Keys)
                     key = item;
 
-                MessageDictionary[key] = x[key];
+                MessageDictionary[key] = x[key].Count > 0 ? x[key] : new ObservableCollection<Message>();
                 FlipFlop = !FlipFlop;
             });
 
